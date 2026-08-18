@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Analytics from "./pages/Analytics";
+import Goals from "./pages/Goals";
+import Focus from "./pages/Focus";
+import Notification from "./pages/Notification";
+import Tasks from "./pages/Tasks";
+import Setting from "./pages/Setting";
+import Calendar from "./pages/Calendar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app-layout">
+        <Navbar />
+
+        <main className="main-content">
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/goals" element={<Goals />} />
+            <Route path="/focus" element={<Focus />} />
+            <Route path="/notification" element={<Notification />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/setting" element={<Setting />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/addTasks" />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
