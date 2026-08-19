@@ -1,21 +1,16 @@
 import React from "react";
 import logo from "../images/logo.png";
 
-const SignIn = () => {
+const Login = () => {
   return (
     <div className="sigin-form display alignItemsC">
+      <div className="signin-logo login-page display alignItemsC justifyItemsC">
+        <img src={logo} alt="studentOs" className="logo-signin" />
+      </div>
       <div className="form-sigin-login display alignItemsC justifyItemsC">
         <form action="" className="display displayColumn gap-24">
           <img src={logo} alt="studentOs" className="form-logo" />
-          <h1 className="createUserHead">Create your account</h1>
-          <div className="name-input-createuser display displayColumn createUserDiv gap-8">
-            <p>Full Name</p>
-            <input
-              type="text"
-              placeholder="John Deo"
-              className="form-input padding-8"
-            />
-          </div>
+          <h1 className="createUserHead">Welcome Back</h1>
           <div className="email-input-createuser display displayColumn createUserDiv gap-8">
             <p>Email address</p>
             <input
@@ -27,38 +22,26 @@ const SignIn = () => {
           <div className="pass-input-createuser display displayColumn createUserDiv gap-8">
             <p>Password</p>
             <input
-              type="text"
+              type="password"
               placeholder="Password"
-              className="form-input padding-8"
-            />
-          </div>
-          <div className="pass-input-createuser display displayColumn createUserDiv gap-8">
-            <p>Confirm Password</p>
-            <input
-              type="text"
-              placeholder="Confirm Password"
               className="form-input padding-8"
             />
           </div>
           <div className="termAndCondition display gap-8">
             <input type="checkbox" />
             <p>
-              I agree to the <a href="/signin">Terms of Service</a> and{" "}
-              <a href="/signin">Privacy Policy</a>
+              Remember me
             </p>
           </div>
           <div className="createAccountBtn">
             <button className="createUserBtn borderRadius-12 btnOutlineBorder display alignItemsC justifyItemsC">
-              Create Account
+              Login
             </button>
           </div>
         </form>
-      </div>
-      <div className="signin-logo display alignItemsC justifyItemsC">
-        <img src={logo} alt="studentOs" className="logo-signin" />
       </div>
     </div>
   );
 };
 
-export default SignIn;
+export default Login;

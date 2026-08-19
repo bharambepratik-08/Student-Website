@@ -45,6 +45,12 @@ const Navbar = () => {
               <i class="fa-regular fa-bell"></i>
               Notification
             </Link>
+            <Link to="/signin" className="navBarRouterBtn signinNavBtn btnOutlineBorder borderRadius-8 bgTrans display alignItemsC padding-12">
+              Sign In
+            </Link>
+            <Link to="/login" className="navBarRouterBtn loginNavBtn btnOutlineBorder borderRadius-8 bgTrans display alignItemsC padding-12">
+              Login
+            </Link>
             <Link to="/setting" className="navBarRouterBtn settingNavBtn btnOutlineBorder borderRadius-8 bgTrans display alignItemsC padding-12">
               <i class="fa-solid fa-gear"></i>
               Setting

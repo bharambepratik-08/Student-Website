@@ -5,32 +5,56 @@
 }
 
 :root {
-  /* Main Brand Colors */
-  --primary: #6366f1;           /* Signature Indigo */
-  --second-primary: #3b3ec4;
-  --on-primary: #ffffff;
-  --primary-container: #e0e7ff;
-  --on-primary-container: #1e1b4b;
-
-  /* Surface & Backgrounds */
   --surface: #ffffff;
   --surface-dim: #d9dadb;
-  --surface-bright: #f8f9fa;    /* Main background color */
-  --surface-container: #edeef0; /* Card backgrounds */
-  --surface-container-high: #e7e8ea;
-
-  /* Text & Typography */
-  --text-primary: #111827;      /* Dark charcoal for headings */
-  --text-secondary: #4b5563;    /* Muted gray for body text */
-  
-  /* Semantic Colors */
-  --success: #10b981;           /* Green */
-  --warning: #f59e0b;           /* Orange/Yellow */
-  --danger: #ef4444;            /* Red */
-
-  /* Borders & Outlines */
-  --outline: #d1d5db;
-  --outline-variant: #e5e7eb;
+  --surface-bright: #f8f9fa;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f3f4f5;
+  --surface-container: #edeeef;
+  --surface-container-high: #e7e8e9;
+  --surface-container-highest: #e1e3e4;
+  --on-surface: #191c1d;
+  --on-surface-variant: #464554;
+  --inverse-surface: #2e3132;
+  --inverse-on-surface: #f0f1f2;
+  --outline: #767586;
+  --outline-variant: #c7c4d7;
+  --surface-tint: #494bd6;
+  --primary: #4648d4;
+  --on-primary: #ffffff;
+  --primary-container: #6063ee;
+  --on-primary-container: #fffbff;
+  --inverse-primary: #c0c1ff;
+  --secondary: #6b38d4;
+  --on-secondary: #ffffff;
+  --secondary-container: #8455ef;
+  --on-secondary-container: #fffbff;
+  --tertiary: #904900;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #b55d00;
+  --on-tertiary-container: #fffbff;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+  --primary-fixed: #e1e0ff;
+  --primary-fixed-dim: #c0c1ff;
+  --on-primary-fixed: #07006c;
+  --on-primary-fixed-variant: #2f2ebe;
+  --secondary-fixed: #e9ddff;
+  --secondary-fixed-dim: #d0bcff;
+  --on-secondary-fixed: #23005c;
+  --on-secondary-fixed-variant: #5516be;
+  --tertiary-fixed: #ffdcc5;
+  --tertiary-fixed-dim: #ffb783;
+  --on-tertiary-fixed: #301400;
+  --on-tertiary-fixed-variant: #703700;
+  --background: #f8f9fa;
+  --on-background: #191c1d;
+  --surface-variant: #e1e3e4;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --border-subtle: #e5e7eb;
 }
 
 .display {
@@ -53,6 +77,10 @@
   padding: 12px;
 }
 
+.padding-8 { 
+  padding: 8px;
+}
+
 .colorWhite {
   color: #fff;
 }
@@ -60,6 +88,18 @@
 .btnOutlineBorder {
   outline: 0;
   border: none;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.gap-12 {
+  gap: 12px;
+}
+
+.gap-24 {
+  gap: 24px;
 }
 
 .justifyItemsC {
@@ -80,6 +120,9 @@
 
 .borderRadius-16 {
   border-radius: 16px;
+}
+.borderRadius-12 {
+  border-radius: 12px;
 }
 
 .borderRadius-8 {
@@ -103,7 +146,7 @@
   width: fit-content;
   height: 100vh;
   box-sizing: border-box;
-  border-right: 2px var(--outline) solid;
+  border-right: 2px var(--outline-variant) solid;
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
   padding: 24px 16px 0;
@@ -142,8 +185,8 @@
 }
 
 .navBarRouterBtn:hover {
-  background-color: var(--outline-variant);
-  color: var(--second-primary);
+  background-color: var(--primary-fixed);
+  color: var(--primary);
 }
 
 .profileUserIden {
@@ -157,4 +200,65 @@
 
 .top {
   margin-left: 4px;
+}
+
+.logo-signin {
+  height: 300px;
+  width: auto;
+  z-index: 100;
+  border-radius: 16px;
+}
+
+.signin-logo {
+  background-image: url(./svg/logoBackground.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
+  height: 100vh;
+  width: 50%;
+}
+
+.form-logo {
+  height: 150px;
+  width: 150px;
+}
+.form-sigin-login {
+  width: 50%;
+  margin-top: -4rem;
+}
+
+.form-input {
+  width: 100%;
+  height: 20px;
+  border-radius: 8px;
+  border: 2px var(--outline) solid;
+  font-size: 16px;
+}
+
+.createUserHead {
+  margin-top: -24px;
+}
+
+.createUserDiv {
+  p {
+    color: var(--text-primary);
+    text-shadow: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+  }
+}
+
+.createUserBtn {
+  height: 40px;
+  width: 100%;
+  background-color: var(--surface-tint); 
+  padding: 18px;
+  color: #fff;
+  font-size: medium;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-page {
+  background-position: left;
 }
