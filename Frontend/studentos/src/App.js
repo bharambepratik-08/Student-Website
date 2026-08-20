@@ -1,4 +1,5 @@
 import "./App.css";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
@@ -11,12 +12,18 @@ import Setting from "./pages/Setting";
 import Calendar from "./pages/Calendar";
 import SignIn from "./pages/SignIn";
 import Login from "./pages/Login";
+import AddTask from "./components/AddTask";
+import "./CSS/SignInLoginPage.css";
+import "./CSS/NavBar.css";
+import "./CSS/AddTask.css";
 
 function App() {
+  const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
+
   return (
     <Router>
       <div className="app-layout">
-        <Navbar />
+        <Navbar onOpenAddTask={() => setIsAddTaskOpen(true)} />
 
         <main className="main-content">
           <Routes>
@@ -31,8 +38,20 @@ function App() {
             <Route path="/addTasks" />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/login" element={<Login />} />
+            <Route
+              path="/tasks"
+              element={<Tasks onOpenAddTask={() => setIsAddTaskOpen(true)} />}
+            />
           </Routes>
         </main>
+
+        {isAddTaskOpen && (
+          <div className="backdrop" onClick={() => setIsAddTaskOpen(false)}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <AddTask onClose={() => setIsAddTaskOpen(false)} />
+            </div>
+          </div>
+        )}
       </div>
     </Router>
   );

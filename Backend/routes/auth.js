@@ -4,6 +4,7 @@ const User = require("../models/Users");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
+const fetchuser = require('../middleware/fetchUser');
 const JWT_SECRET = "MERNcoding";
 
 // Create a User using POST:'/api/auth/createUser' Don't require login
@@ -52,8 +53,6 @@ router.post(
   },
 );
 
-
-
 // Login a User using POST:'/api/auth/login' Don't require login
 router.post(
   "/login",
@@ -71,12 +70,12 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      let user = await User.findOne({email});
+      let user = await User.findOne({ email });
       if (!user) {
         return res.status(400).json({ errors: "Invalid credentials" });
       }
 
-      const passwordCompare = await bcrypt.compare(password, user.password)
+      const passwordCompare = await bcrypt.compare(password, user.password);
 
       if (!passwordCompare) {
         return res.status(400).json({ errors: "Invalid credentials" });
@@ -84,18 +83,29 @@ router.post(
 
       const data = {
         user: {
-            id: user.id
-        }
-      }
+          id: user.id,
+        },
+      };
 
       const authtoken = jwt.sign(data, JWT_SECRET);
-      res.json(authtoken)
-
+      res.json(authtoken);
     } catch (error) {
-        console.error(error.message);
+      console.error(error.message);
       res.status(500).send("Some error occured");
     }
   },
 );
+
+// Get logged in User Details using: POST "/api/auth/getuser". Login required
+
+router.post("/getuser", fetchuser, async (req, res) => {
+  try {
+    userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Some error occured");
+  }
+});
 
 module.exports = router;

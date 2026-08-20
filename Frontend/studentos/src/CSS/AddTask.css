@@ -1,0 +1,87 @@
+.AddTaskDiv {
+  width: 600px;
+  height: fit-content;
+}
+
+.UpperHeadAddTask {
+  border-bottom: 2px var(--outline) solid;
+}
+
+.ClossAddTaskBtn {
+  cursor: pointer;
+}
+
+.AddTaskParagraph {
+  font-size: small;
+  font-weight: 600;
+}
+
+.TaskTextArea {
+  height: 80px;
+}
+
+.DueDateAndTimeDiv,
+.PriorityAndCatogeryDiv {
+    width: 50%;
+}
+
+.DivDateTime,
+.DivPriorityCatogery {
+  width: 100%;
+}
+
+.InputBoxDateTime {
+  width: 95%;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px var(--outline) solid;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.SelectBoxPriorityCatogery {
+  height: 40px;
+  width: 95%;
+  border-radius: 8px;
+  border: 2px var(--outline) solid;
+  font-size: 16px;
+}
+
+.SetReminderDiv {
+    border: 2px var(--outline) solid;
+    border-radius: 12px;
+}
+
+.SetReminderBtn {
+    height: 18px;
+    width: 18px;
+}
+
+.IconSetReminder {
+    color: var(--on-primary-fixed);
+    height: 24px;
+    width: 24px;
+    background-color: var(--border-subtle);
+}
+
+.ReminderCheckbox {
+    padding-right: 10px;
+}
+
+.AddTaskForm {
+    border-bottom: 2px var(--outline) solid;
+}
+
+.AddBtn {
+    color: #fff;
+    height: 30px;
+    width: 150px;
+}
+
+.CancelBtn {
+    cursor: pointer;
+    height: 35px;
+    width: 150px;
+    background-color: transparent;
+    color: black;
+}
