@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../images/logo.png";
-import SigninForm from "../components/SigninForm";
+import SigninForm from "../components/SignIn/SigninForm";
 
 const SignIn = () => {
   return (

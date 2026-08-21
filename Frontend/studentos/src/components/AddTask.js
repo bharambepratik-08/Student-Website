@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import TaskContext from "../context/tasks/TaskContext";
 
 const AddTask = ({ onClose }) => {
+  const context = useContext(TaskContext);
+  const { addTask } = context;
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     dueDate: "",
-    priority: "MediumPriority",
+    priority: "HighPriority",
     time: "",
     category: "hi",
     tags: "",
-    reminder: false,
+    reminder: true,
   });
 
   const handleChange = (e) => {
@@ -22,7 +26,15 @@ const AddTask = ({ onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("New Task Data:", formData);
+    addTask(
+      formData.title,
+      formData.description,
+      formData.dueDate,
+      formData.time,
+      formData.priority,
+      formData.category,
+      formData.tags,
+    );
     if (onClose) onClose();
   };
 
@@ -40,8 +52,11 @@ const AddTask = ({ onClose }) => {
       </div>
 
       <div className="AddTaskForm padding-24">
-        {/* Added id="addTaskFormId" so the external button can submit it */}
-        <form id="addTaskFormId" onSubmit={handleSubmit} className="display displayColumn gap-24">
+        <form
+          id="addTaskFormId"
+          onSubmit={handleSubmit}
+          className="display displayColumn gap-24"
+        >
           <div className="TaskTitleInput display displayColumn gap-8">
             <p className="AddTaskParagraph">Task Title</p>
             <input
@@ -152,8 +167,6 @@ const AddTask = ({ onClose }) => {
           </div>
         </form>
       </div>
-
-      {/* Buttons restored to original position outside AddTaskForm */}
       <div className="CancelAndAddBtn display alignItemsC justifyItemsFlexEnd padding-24">
         <div>
           <button

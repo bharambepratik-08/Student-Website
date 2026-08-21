@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = "MERNcoding";
 
-const fetchuser = (res, req, next) => {
+const fetchuser = (req, res, next) => {
     // Get the user from the jwt token and add id to req obj
     const token = req.header('auth-token');
 
     if(!token) {
-        return req.status(401).send({error: "Please authenticate using a valid token"})
+        return res.status(401).send({error: "Please authenticate using a valid token"})
     }
 
     try {
@@ -14,7 +14,7 @@ const fetchuser = (res, req, next) => {
     req.user = data.user;
     next() 
     } catch (error) {
-        return req.status(401).send({error: "Please authenticate using a valid token"})
+        return res.status(401).send({error: "Please authenticate using a valid token"})
     }
 };
 

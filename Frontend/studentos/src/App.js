@@ -13,14 +13,17 @@ import Calendar from "./pages/Calendar";
 import SignIn from "./pages/SignIn";
 import Login from "./pages/Login";
 import AddTask from "./components/AddTask";
+import TaskState from './context/tasks/Taskstate'
 import "./CSS/SignInLoginPage.css";
 import "./CSS/NavBar.css";
 import "./CSS/AddTask.css";
+import "./CSS/Tasks.css"
 
 function App() {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
 
   return (
+    <TaskState>
     <Router>
       <div className="app-layout">
         <Navbar onOpenAddTask={() => setIsAddTaskOpen(true)} />
@@ -54,6 +57,7 @@ function App() {
         )}
       </div>
     </Router>
+    </TaskState>
   );
 }
 

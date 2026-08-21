@@ -56,7 +56,7 @@ router.post(
         user: req.user.id,
       });
 
-      const saveTask = await task.save;
+      const saveTask = await task.save();
 
       res.json(saveTask);
     } catch (error) {

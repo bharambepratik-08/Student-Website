@@ -1,0 +1,29 @@
+.SearchBarTasksInput {
+    border: 1px var(--outline) solid;
+    height: 30px;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.FilterBtnTasks {
+    height: 20px;
+    width: 60px;
+    border-radius: 8px;
+    border: 1px var(--outline) solid;
+}
+
+.HeaderTasksNavbar {
+    width: 100%;
+    padding-bottom: 24px;
+    border-bottom: 2px var(--outline) solid;
+}
+
+.TasksPageNavbar {
+    width: 70%;
+}
+
+.TasksCardDiv {
+    border: 1px var(--outline) solid;
+    height: 200px;
+    width: 400px;
+}
