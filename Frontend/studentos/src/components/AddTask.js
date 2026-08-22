@@ -1,7 +1,11 @@
 import React, { useState, useContext } from "react";
 import TaskContext from "../context/tasks/TaskContext";
 
+
+// Layout for the add task form (Frontend)
 const AddTask = ({ onClose }) => {
+
+  // To clear the form after submit 
   const context = useContext(TaskContext);
   const { addTask } = context;
 
@@ -9,7 +13,7 @@ const AddTask = ({ onClose }) => {
     title: "",
     description: "",
     dueDate: "",
-    priority: "HighPriority",
+    priority: "High",
     time: "",
     category: "hi",
     tags: "",
@@ -39,6 +43,7 @@ const AddTask = ({ onClose }) => {
   };
 
   return (
+    // Frontend 
     <div className="AddTaskDiv padding-24 borderRadius-16">
       <div className="UpperHeadAddTask display alignItemsC justifyItemsSpaceBtw padding-12">
         <h3>Add New Task</h3>
@@ -102,9 +107,9 @@ const AddTask = ({ onClose }) => {
                   onChange={handleChange}
                   className="SelectBoxPriorityCatogery padding-8"
                 >
-                  <option value="HighPriority">High 🔴</option>
-                  <option value="MediumPriority">Medium 🟡</option>
-                  <option value="LowPriority">Low 🟢</option>
+                  <option value="High">High 🔴</option>
+                  <option value="Medium">Medium 🟡</option>
+                  <option value="Low">Low 🟢</option>
                 </select>
               </div>
             </div>

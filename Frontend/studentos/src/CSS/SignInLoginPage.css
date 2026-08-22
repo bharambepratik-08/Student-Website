@@ -41,3 +41,8 @@
 .login-page {
   background-position: left;
 }
+
+.sigin-form,
+.login-form {
+  padding: 0;
+}

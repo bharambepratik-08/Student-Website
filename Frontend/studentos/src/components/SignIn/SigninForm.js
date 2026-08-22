@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/logo.png";
 
+// Form layout for the signup (Frontend & Backend)
+
 const SigninForm = () => {
   const [credentials, setCredentials] = useState({
     name: "",
@@ -13,6 +15,8 @@ const SigninForm = () => {
   const handeSubmit = async (e) => {
     e.preventDefault();
 
+
+    // Need to change the link (http://localhost:5000/api/auth/createuser) if we go to other server or device 
     const response = await fetch("http://localhost:5000/api/auth/createuser", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -38,6 +42,8 @@ const SigninForm = () => {
   };
 
   return (
+
+    // Frontend 
     <div className="form-sigin-login display alignItemsC justifyItemsC">
       <form onSubmit={handeSubmit} className="display displayColumn gap-24">
         <img src={logo} alt="studentOs" className="form-logo" />

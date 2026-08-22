@@ -22,8 +22,61 @@
     width: 70%;
 }
 
-.TasksCardDiv {
-    border: 1px var(--outline) solid;
-    height: 200px;
-    width: 400px;
+.TaskCard {
+    border: 2px var(--outline) solid;
+    height: fit-content;
+    width: 300px;
+}
+
+.TaskPage {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.TaskCardBTN {
+    box-sizing: border-box;
+    width: fit-content;
+    border-right: 1px var(--outline) solid;
+    padding: 12px 12px 12px 0;
+}
+
+.TaskCardSpcBtn {
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.TaskCardTitle {
+    border-bottom: 1px var(--outline) solid;
+}
+
+.InformationBox {
+    height: fit-content;
+    width: fit-content;
+    box-sizing: border-box;
+    background-color: var(--border-subtle);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px;
+}
+
+.TaskCardDetailsPTag {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.TaskPTagColor {
+    color: var(--text-secondary);
+}
+.TaskCardDescription {
+    font-size: 14px;
+}
+
+.TaskCardDescriptionPTag {
+    padding-bottom: 4px;
+}
+
+.padding-left-12 {
+    padding-left: 12px;
 }

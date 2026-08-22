@@ -11,6 +11,7 @@ connectToMongo ();
 app.use(express.json())
 
 app.use('/api/auth', require('./routes/auth'))
+app.use('/api/task', require('./routes/tasks')) 
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

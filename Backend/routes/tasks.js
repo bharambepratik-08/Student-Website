@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 var fetchuser = require("../middleware/fetchUser");
 const Task = require("../models/Tasks");
-const { body, validator } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
 // Get all the tasks for the user using GET: "/api/task/fetchAllTask"
 router.get("/fetchAllTask", fetchuser, async (req, res) => {
@@ -19,8 +19,8 @@ router.post(
   "/addTask",
   fetchuser,
   [
-    body("title", "Enter a valid title").isLength({ min: 3 }),
-    body("description", "Enter a valid description").isLength({ min: 5 }),
+    body("title", "Enter a valid title").exists(),
+    body("description", "Enter a valid description").exists(),
     body("due", "Enter a Due Date").exists(),
     body("time", "Enter a Time").exists(),
     body("catogery", "Please select a Catogery").exists(),
@@ -66,7 +66,7 @@ router.post(
 );
 
 // Update a existing task using: PUT "/api/task/updateTask". Login Required
-router.put("/updateTask/:id", fetchuser, async (res, req) => {
+router.put("/updateTask/:id", fetchuser, async (req, res) => {
   try {
     const {
       title,
@@ -132,7 +132,7 @@ router.put("/updateTask/:id", fetchuser, async (res, req) => {
 });
 
 // Delete a existing task using: DELETE "/api/task/deleteTask". Login Required
-router.delete("/deleteTask/:id", fetchuser, async (res, req) => {
+router.delete("/deleteTask/:id", fetchuser, async (req, res) => {
   // Find the Task to be deleted and delete it
   try {
     let task = await Task.findById(req.params.id);
@@ -145,6 +145,8 @@ router.delete("/deleteTask/:id", fetchuser, async (res, req) => {
     }
 
     task = await Task.findByIdAndDelete(req.params.id);
+
+    res.json({ "Success": "Task has been deleted", task: task });
   } catch (error) {
     return res.status(500).send("Some error occured");
   }

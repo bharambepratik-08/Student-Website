@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = ({ onOpenAddTask }) => {
   return (
     <>
+    {/* NavBar Component */}
       <div className="navBar display justifyItemsSpaceBtw displayColumn">
         <div className="navBarTopDiv display displayColumn">
           <div className="top">
@@ -69,18 +70,6 @@ const Navbar = ({ onOpenAddTask }) => {
             >
               <i className="fa-regular fa-bell"></i>
               Notification
-            </Link>
-            <Link
-              to="/signin"
-              className="navBarRouterBtn signinNavBtn btnOutlineBorder borderRadius-8 bgTrans display alignItemsC padding-12"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/login"
-              className="navBarRouterBtn loginNavBtn btnOutlineBorder borderRadius-8 bgTrans display alignItemsC padding-12"
-            >
-              Login
             </Link>
             <Link
               to="/setting"

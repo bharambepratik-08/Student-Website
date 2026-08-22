@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
 
+// Form layout for the login (Frontend & Backend)
+
 const LoginForm = () => {
 
+  // Backend 
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -14,8 +17,10 @@ const LoginForm = () => {
   const handeSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
+
+    // Need to change the link (http://localhost:5000/api/auth/login) if we go to other server or device 
+    const response = await fetch("http://localhost:5000/api/auth/login", { 
+       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: credentials.email,
@@ -37,6 +42,7 @@ const LoginForm = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
+    // Frontend
     <div className="form-sigin-login display alignItemsC justifyItemsC">
       <form onSubmit={handeSubmit} className="display displayColumn gap-24">
         <img src={logo} alt="studentOs" className="form-logo" />
