@@ -152,4 +152,30 @@ router.delete("/deleteTask/:id", fetchuser, async (req, res) => {
   }
 });
 
+
+// Route: PUT /api/task/completeTask/:id. Login required
+router.put('/completeTask/:id', fetchuser, async (req, res) => {
+    try {
+        // Find the task to be updated and check if it belongs to the user
+        let task = await Task.findById(req.params.id);
+        if (!task) { return res.status(404).send("Not Found") }
+
+        if (task.user.toString() !== req.user.id) {
+            return res.status(401).send("Not Allowed");
+        }
+
+        // Update the 'completed' field to true
+        task = await Task.findByIdAndUpdate(
+            req.params.id, 
+            { $set: { completed: true } }, 
+            { new: true } 
+        );
+
+        res.json(task);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 module.exports = router;

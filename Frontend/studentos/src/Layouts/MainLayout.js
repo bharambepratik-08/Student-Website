@@ -13,7 +13,7 @@ const MainLayout = () => {
       <div className="app-layout">
         <Navbar onOpenAddTask={() => setIsAddTaskOpen(true)} />
         <main className="WidthHeight-100">
-          <Outlet context={{ setIsAddTaskOpen }} /> {/*Passes the function to others so they can use it*/}
+          <Outlet /> {/*Passes the function to others so they can use it*/}
         </main>
 
           {isAddTaskOpen && (

@@ -39,6 +39,11 @@ const TaskSchema = new Schema ({
         type: Boolean,
         required: false,
         default: true
+    },
+    completed: {
+        type: Boolean,
+        required: false, 
+        default: false
     }
 })
 

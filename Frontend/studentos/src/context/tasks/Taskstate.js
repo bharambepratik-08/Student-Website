@@ -112,7 +112,6 @@ const TaskState = (props) => {
     // logic to edit
 
     let newTasks = JSON.parse(JSON.stringify(tasks));
-
     for (let index = 0; index < newTasks.length; index++) {
       const element = newTasks[index];
       if (element._id === id) {
@@ -130,9 +129,35 @@ const TaskState = (props) => {
     setTasks(newTasks);
   };
 
+  const completeTask = async (id) => {
+    try {
+      const response = await fetch(`${host}/api/task/completeTask/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      });
+
+      if (response.ok) {
+        // Update the local state so the UI refreshes instantly
+        setTasks((prevTasks) =>
+          prevTasks.map((task) =>
+            task._id === id ? { ...task, completed: true } : task,
+          ),
+        );
+      } else {
+        const errorJson = await response.json();
+        console.error("Server Error:", errorJson);
+      }
+    } catch (error) {
+      console.error("Network Error:", error);
+    }
+  };
+
   return (
     <TaskContext.Provider
-      value={{ tasks, addTask, deleteTask, editTask, getTasks }}
+      value={{ tasks, addTask, deleteTask, editTask, getTasks, completeTask }}
     >
       {props.children}
     </TaskContext.Provider>

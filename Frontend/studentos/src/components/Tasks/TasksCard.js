@@ -1,19 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import TaskContext from "../../context/tasks/TaskContext";
+import EditTask from "../Tasks/EditTask";
 
-const TasksCard = ({
-  key,
-  id,
-  title,
-  description,
-  priority,
-  due,
-  time,
-  tag,
-}) => {
+const TasksCard = (props) => {
+  const { id, title, description, priority, due, time, tag, catogery, completed } = props;
   const context = useContext(TaskContext);
-  const { deleteTask } = context;
+  const { deleteTask, completeTask, editTask } = context;
 
+  // tell the border color for the card
   const borderColor = () => {
     switch (priority) {
       case "High":
@@ -30,6 +24,7 @@ const TasksCard = ({
     }
   };
 
+  // to add ! - in the starting of the priortiy
   const PrefixPriority = () => {
     switch (priority) {
       case "High":
@@ -46,6 +41,7 @@ const TasksCard = ({
     }
   };
 
+  // to make the time in 12hr format
   const formattedTime = (() => {
     if (!time) return "";
 
@@ -58,12 +54,14 @@ const TasksCard = ({
     return `${String(h).padStart(2, "0")}:${minutes} ${period}`;
   })();
 
+  // to make the date in the form dd/mm/yyyy
   const formattedDue = new Date(due).toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
   });
 
+  // to check that are there any tag and if there is a tag then to add the box for it
   const tagBox = () => {
     if (tag.length !== 0) {
       return (
@@ -76,27 +74,49 @@ const TasksCard = ({
     }
   };
 
+  // brings up the add task page with blured background
+  const [isEditTaskOpen, setIsEditTaskOpen] = useState(false);
+
+  const editTaskFn = (val) => {};
+
   return (
     <div
       className="TaskCard borderRadius-16 padding-12 display"
       style={{ borderLeft: `6px ${borderColor()} solid` }}
     >
       <div className="TaskCardBTN display displayColumn gap-12">
-        <button className="btnOutlineBorder TaskCardSpcBtn">
+        {!completed && <button
+          className="btnOutlineBorder TaskCardSpcBtn"
+          onClick={() => {
+            completeTask(id); // to make the task completed
+          }}
+        >
           <i class="fa-solid fa-check"></i>
-        </button>
+        </button>}
         <button
           className="btnOutlineBorder TaskCardSpcBtn"
           onClick={() => {
-            deleteTask(id);
+            deleteTask(id); // to delete the task
           }}
         >
           <i class="fa-solid fa-trash"></i>
         </button>
+        {!completed && <button
+          className="btnOutlineBorder TaskCardSpcBtn"
+          onClick={() => {
+            editTaskFn(id); // to edit the task
+            setIsEditTaskOpen(true);
+          }}
+        >
+          <i class="fa-solid fa-pen"></i>
+        </button>}
       </div>
       <div className="padding-8 TaskCardDetails">
-        <div className="TaskCardTitle padding-4">
+        <div className="TaskCardTitle display alignItemsC padding-4 gap-8">
           <h4>{title}</h4>
+          {completed && <div className="CompletedStatus borderRadius-16">
+            <p>completed</p>
+          </div>}
         </div>
         <div className="TaskCardDescription padding-4">
           <p className="TaskCardDescriptionPTag">{description}</p>
@@ -119,6 +139,26 @@ const TasksCard = ({
           </div>
         </div>
       </div>
+
+      {isEditTaskOpen && (
+        <div className="backdrop" onClick={() => setIsEditTaskOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <EditTask
+              task={{
+                id: id,
+                title,
+                description,
+                priority,
+                due,
+                time,
+                tag,
+                catogery,
+              }}
+              onClose={() => setIsEditTaskOpen(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
