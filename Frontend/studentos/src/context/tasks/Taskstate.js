@@ -15,6 +15,7 @@ const TaskState = (props) => {
     priority,
     catogery,
     tags,
+    focusSession
   ) => {
     const response = await fetch(`${host}/api/task/addTask`, {
       method: "POST",
@@ -30,6 +31,7 @@ const TaskState = (props) => {
         priority,
         catogery,
         tags,
+        focusSession
       }),
     });
 
@@ -89,6 +91,7 @@ const TaskState = (props) => {
     priority,
     catogery,
     tags,
+    focusSession
   ) => {
     const response = await fetch(`${host}/api/task/updateTask/${id}`, {
       method: "PUT",
@@ -104,6 +107,7 @@ const TaskState = (props) => {
         priority,
         catogery,
         tags,
+        focusSession
       }),
     });
 
@@ -122,6 +126,7 @@ const TaskState = (props) => {
         newTasks[index].priority = priority;
         newTasks[index].catogery = catogery;
         newTasks[index].tags = tags;
+        newTasks[index].focusSession = focusSession;
         break;
       }
     }

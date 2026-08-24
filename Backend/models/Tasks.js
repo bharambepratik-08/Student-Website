@@ -44,6 +44,11 @@ const TaskSchema = new Schema ({
         type: Boolean,
         required: false, 
         default: false
+    },
+    focusSession: {
+        type: Boolean,
+        required: false, 
+        default: false
     }
 })
 

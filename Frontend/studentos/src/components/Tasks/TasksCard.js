@@ -3,7 +3,7 @@ import TaskContext from "../../context/tasks/TaskContext";
 import EditTask from "../Tasks/EditTask";
 
 const TasksCard = (props) => {
-  const { id, title, description, priority, due, time, tag, catogery, completed } = props;
+  const { id, title, description, priority, due, time, tag, catogery, completed, focusSession } = props;
   const context = useContext(TaskContext);
   const { deleteTask, completeTask, editTask } = context;
 
@@ -74,10 +74,8 @@ const TasksCard = (props) => {
     }
   };
 
-  // brings up the add task page with blured background
+  // brings up the edit task page with blured background
   const [isEditTaskOpen, setIsEditTaskOpen] = useState(false);
-
-  const editTaskFn = (val) => {};
 
   return (
     <div
@@ -104,11 +102,16 @@ const TasksCard = (props) => {
         {!completed && <button
           className="btnOutlineBorder TaskCardSpcBtn"
           onClick={() => {
-            editTaskFn(id); // to edit the task
             setIsEditTaskOpen(true);
           }}
         >
           <i class="fa-solid fa-pen"></i>
+        </button>}
+        {focusSession && !completed &&
+         <button
+          className="btnOutlineBorder TaskCardSpcBtn"
+        >
+          <i class="fa-solid fa-stopwatch"></i>
         </button>}
       </div>
       <div className="padding-8 TaskCardDetails">

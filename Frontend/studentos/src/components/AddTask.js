@@ -18,6 +18,7 @@ const AddTask = ({ onClose }) => {
     category: "hi",
     tags: "",
     reminder: true,
+    focusSession: false
   });
 
   const handleChange = (e) => {
@@ -38,6 +39,7 @@ const AddTask = ({ onClose }) => {
       formData.priority,
       formData.category,
       formData.tags,
+      formData.focusSession
     );
     if (onClose) onClose();
   };
@@ -71,7 +73,6 @@ const AddTask = ({ onClose }) => {
               onChange={handleChange}
               placeholder="e.g. Prepare Q3 Marketing Report"
               className="InputBoxString padding-8"
-              required
             />
           </div>
 
@@ -153,20 +154,38 @@ const AddTask = ({ onClose }) => {
             />
           </div>
 
-          <div className="SetReminderDiv padding-12 display alignItemsC justifyItemsSpaceBtw">
+          <div className="setDiv padding-12 display alignItemsC justifyItemsSpaceBtw">
             <div className="ReminderText display displayRow gap-8">
               <div className="IconSetReminder display alignItemsC justifyItemsC borderRadius-8">
                 <i className="fa-regular fa-bell"></i>
               </div>
               <h4>Set Reminder</h4>
             </div>
-            <div className="ReminderCheckbox">
+            <div className="setCheckbox">
               <input
                 type="checkbox"
                 name="reminder"
                 checked={formData.reminder}
                 onChange={handleChange}
-                className="SetReminderBtn"
+                className="setBtn"
+              />
+            </div>
+          </div>
+
+          <div className="setDiv padding-12 display alignItemsC justifyItemsSpaceBtw">
+            <div className="ReminderText display displayRow gap-8">
+              <div className="IconSetReminder display alignItemsC justifyItemsC borderRadius-8">
+                <i className="fa-regular fa-alarm"></i>
+              </div>
+              <h4>Set Focus Session</h4>
+            </div>
+            <div className="setCheckbox">
+              <input
+                type="checkbox"
+                name="focusSession"
+                checked={formData.focusSession}
+                onChange={handleChange}
+                className="setBtn"
               />
             </div>
           </div>

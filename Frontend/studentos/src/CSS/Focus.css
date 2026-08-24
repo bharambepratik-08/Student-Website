@@ -1,0 +1,64 @@
+.FocusShowTimeDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 48px;
+    font-weight: bold;
+    color: #1f2937;
+}
+
+.timeRemaning {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.countDownDiv {
+    background-color: var(--surface);
+    border-radius: 50%;
+    border: 1px var(--surface-container-highest) solid;
+}
+
+.FocusPage {
+    height: 100%;
+    background-color: var(--surface-container-low);
+    box-sizing: border-box;
+}
+
+.btnTimerUses {
+    height: 44px;
+    width: 44px;
+    font-size: 24px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px var(--surface-container-highest) solid;
+    cursor: pointer;
+}
+
+.saveToHistoryFormBtn {
+    cursor: pointer;
+    border: 1px var(--surface-container-highest) solid;
+    background-color: transparent;
+    background-color: var(--surface-container-low);
+}
+
+.existingTaskText {
+    text-align: start;
+}
+
+.ExistingTaskSelector {
+    cursor: pointer;
+    border: 2px var(--surface-container-highest) solid;
+    background-color: transparent;
+    background-color: var(--surface-container-low);
+
+    i {
+        font-size: 20px;
+    }
+}
+
+.saveToHistoryFormDiv {
+    width: 450px;
+}
