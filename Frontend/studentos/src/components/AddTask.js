@@ -1,13 +1,17 @@
 import React, { useState, useContext } from "react";
 import TaskContext from "../context/tasks/TaskContext";
 
-
 // Layout for the add task form (Frontend)
 const AddTask = ({ onClose }) => {
-
-  // To clear the form after submit 
+  // To clear the form after submit
   const context = useContext(TaskContext);
   const { addTask } = context;
+
+  const [IsHr, setIsHr] = useState(0);
+  const [IsMin, setIsMin] = useState(0);
+  const [IsSec, setIsSec] = useState(0);
+
+  const time = IsHr * 60 + IsMin;
 
   const [formData, setFormData] = useState({
     title: "",
@@ -18,7 +22,7 @@ const AddTask = ({ onClose }) => {
     category: "hi",
     tags: "",
     reminder: true,
-    focusSession: false
+    focusSession: false,
   });
 
   const handleChange = (e) => {
@@ -39,13 +43,14 @@ const AddTask = ({ onClose }) => {
       formData.priority,
       formData.category,
       formData.tags,
-      formData.focusSession
+      formData.focusSession,
+      time
     );
     if (onClose) onClose();
   };
 
   return (
-    // Frontend 
+    // Frontend
     <div className="AddTaskDiv padding-24 borderRadius-16">
       <div className="UpperHeadAddTask display alignItemsC justifyItemsSpaceBtw padding-12">
         <h3>Add New Task</h3>
@@ -172,7 +177,8 @@ const AddTask = ({ onClose }) => {
             </div>
           </div>
 
-          <div className="setDiv padding-12 display alignItemsC justifyItemsSpaceBtw">
+          <div className="setDiv padding-12 display displayColumn">
+          <div className="display alignItemsC justifyItemsSpaceBtw">
             <div className="ReminderText display displayRow gap-8">
               <div className="IconSetReminder display alignItemsC justifyItemsC borderRadius-8">
                 <i className="fa-regular fa-alarm"></i>
@@ -188,6 +194,42 @@ const AddTask = ({ onClose }) => {
                 className="setBtn"
               />
             </div>
+          </div>
+          <div>
+            {formData.focusSession && (
+            <div className="SetTimerTaskFocus display alignItemsC justifyItemsSpaceBtw">
+              <div class="timer-input">
+                <input
+                  type="number"
+                  id="hours"
+                  min="0"
+                  max="23"
+                  placeholder="HH"
+                  name="duration"
+                  onChange={(e) => setIsHr(e.target.value)}
+                />
+                <span>:</span>
+                <input
+                  type="number"
+                  id="minutes"
+                  min="0"
+                  max="59"
+                  placeholder="MM"
+                  onChange={(e) => setIsMin(e.target.value)}
+                />
+                <span>:</span>
+                <input
+                  type="number"
+                  id="seconds"
+                  min="0"
+                  max="59"
+                  placeholder="SS"
+                  onChange={(e) => setIsSec(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+          </div>
           </div>
         </form>
       </div>

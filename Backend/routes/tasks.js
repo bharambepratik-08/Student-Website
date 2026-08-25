@@ -36,7 +36,8 @@ router.post(
         catogery,
         tags,
         setReminder,
-        focusSession
+        focusSession,
+        focusSessionTimer
       } = req.body;
 
       // For errors return bad request
@@ -55,6 +56,7 @@ router.post(
         tags,
         setReminder,
         focusSession,
+        focusSessionTimer,
         user: req.user.id,
       });
 
@@ -79,7 +81,8 @@ router.put("/updateTask/:id", fetchuser, async (req, res) => {
       catogery,
       tags,
       setReminder,
-      focusSession
+      focusSession,
+      focusSessionTimer
     } = req.body;
 
     // Create a newTask Obj
@@ -112,6 +115,9 @@ router.put("/updateTask/:id", fetchuser, async (req, res) => {
     }
     if (focusSession) {
       newTask.focusSession = focusSession;
+    }
+    if(focusSessionTimer) {
+      newTask.focusSessionTimer = focusSessionTimer;
     }
 
     // Find the Task to be updated and update it

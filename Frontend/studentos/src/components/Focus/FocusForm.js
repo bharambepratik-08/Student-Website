@@ -2,16 +2,16 @@ import React, { useState, useContext } from "react";
 import FocusContext from "../../context/Focus/FocusContext";
 
 // Layout for the add task form (Frontend)
-const FocusForm = ({ onClose, changeTimerBtn, valTrue }) => {
+const FocusForm = ({ onClose, changeTimerBtn, valTrue, setTimerFucntion }) => {
   // To clear the form after submit
   const context = useContext(FocusContext);
   const { addFocusSession } = context;
 
-  const [hour, setHour]= useState(0)
-  const [minute, setMinute]= useState(0)
-  const [seconds, setSeconds]= useState(0)
+  const [hour, setHour] = useState(0);
+  const [minute, setMinute] = useState(0);
+  const [seconds, setSeconds] = useState(0);
 
-  const timerDuration = `${hour}:${minute}:${seconds}`
+  const timerDuration = `${hour}:${minute}:${seconds}`;
 
   const [formData, setFormData] = useState({
     title: "",
@@ -77,37 +77,39 @@ const FocusForm = ({ onClose, changeTimerBtn, valTrue }) => {
             />
           </div>
 
-          {valTrue && <div className="SetReminderDiv padding-12 display alignItemsC justifyItemsSpaceBtw">
-            <div class="timer-input">
-              <input
-                type="number"
-                id="hours"
-                min="0"
-                max="23"
-                placeholder="HH"
-                name='duration'
-                onChange={(e) => setHour(e.target.value)}
-              />
-              <span>:</span>
-              <input
-                type="number"
-                id="minutes"
-                min="0"
-                max="59"
-                placeholder="MM"
-                onChange={(e) => setMinute(e.target.value)}
-              />
-              <span>:</span>
-              <input
-                type="number"
-                id="seconds"
-                min="0"
-                max="59"
-                placeholder="SS"
-                onChange={(e) => setSeconds(e.target.value)}
-              />
+          {valTrue && (
+            <div className="SetReminderDiv padding-12 display alignItemsC justifyItemsSpaceBtw">
+              <div class="timer-input">
+                <input
+                  type="number"
+                  id="hours"
+                  min="0"
+                  max="23"
+                  placeholder="HH"
+                  name="duration"
+                  onChange={(e) => setHour(e.target.value)}
+                />
+                <span>:</span>
+                <input
+                  type="number"
+                  id="minutes"
+                  min="0"
+                  max="59"
+                  placeholder="MM"
+                  onChange={(e) => setMinute(e.target.value)}
+                />
+                <span>:</span>
+                <input
+                  type="number"
+                  id="seconds"
+                  min="0"
+                  max="59"
+                  placeholder="SS"
+                  onChange={(e) => setSeconds(e.target.value)}
+                />
+              </div>
             </div>
-          </div>}
+          )}
         </form>
       </div>
       <div className="CancelAndAddBtn display alignItemsC justifyItemsFlexEnd padding-24">
@@ -125,7 +127,10 @@ const FocusForm = ({ onClose, changeTimerBtn, valTrue }) => {
             type="submit"
             form="addTaskFormId"
             className="addTaskBtn AddBtn btnOutlineBorder borderRadius-8"
-            onClick={changeTimerBtn}
+            onClick={() => {
+              changeTimerBtn();
+              setTimerFucntion(hour, minute, seconds);
+            }}
           >
             Add Focus Session
           </button>

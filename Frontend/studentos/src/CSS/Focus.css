@@ -62,3 +62,24 @@
 .saveToHistoryFormDiv {
     width: 450px;
 }
+
+.ShowTaskSelectorForm {
+    min-width: 350px;
+    max-width: 500px;
+    height: 750px;
+    background-color: var(--surface);
+    border: 2px var(--text-secondary) solid;
+}
+
+.taskSelectorButtonFocus {
+    cursor: pointer;
+    width: 100%;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.SetTimerTaskFocus {
+    padding: 12px 0;
+}

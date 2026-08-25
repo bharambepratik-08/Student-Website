@@ -15,7 +15,8 @@ const TaskState = (props) => {
     priority,
     catogery,
     tags,
-    focusSession
+    focusSession,
+    focusSessionTimer
   ) => {
     const response = await fetch(`${host}/api/task/addTask`, {
       method: "POST",
@@ -31,7 +32,8 @@ const TaskState = (props) => {
         priority,
         catogery,
         tags,
-        focusSession
+        focusSession,
+        focusSessionTimer
       }),
     });
 
@@ -91,7 +93,8 @@ const TaskState = (props) => {
     priority,
     catogery,
     tags,
-    focusSession
+    focusSession,
+    focusSessionTimer
   ) => {
     const response = await fetch(`${host}/api/task/updateTask/${id}`, {
       method: "PUT",
@@ -107,7 +110,8 @@ const TaskState = (props) => {
         priority,
         catogery,
         tags,
-        focusSession
+        focusSession,
+        focusSessionTimer
       }),
     });
 
@@ -119,14 +123,15 @@ const TaskState = (props) => {
     for (let index = 0; index < newTasks.length; index++) {
       const element = newTasks[index];
       if (element._id === id) {
-        newTasks[index].title = title;
-        newTasks[index].description = description;
-        newTasks[index].due = due;
-        newTasks[index].time = time;
-        newTasks[index].priority = priority;
-        newTasks[index].catogery = catogery;
-        newTasks[index].tags = tags;
-        newTasks[index].focusSession = focusSession;
+        element.title = title;
+        element.description = description;
+        element.due = due;
+        element.time = time;
+        element.priority = priority;
+        element.catogery = catogery;
+        element.tags = tags;
+        element.focusSession = focusSession;
+        element.focusSessionTimer = focusSessionTimer;
         break;
       }
     }

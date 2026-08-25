@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import FocusTimer from '../components/Focus/FocusTimer'
+import ShowTask from '../components/Focus/ShowTask'
 
 const Focus = () => {
 

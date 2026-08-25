@@ -49,6 +49,10 @@ const TaskSchema = new Schema ({
         type: Boolean,
         required: false, 
         default: false
+    },
+    focusSessionTimer: {
+        type: String,
+        required:false
     }
 })
 

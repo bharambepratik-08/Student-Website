@@ -2,15 +2,39 @@ import React, { useState, useEffect } from "react";
 import SaveToHistoryFocusSession from "./SaveToHistoryFocusSession";
 import FocusTaskExistForm from "./FocusTaskExistForm";
 import FocusForm from "./FocusForm";
+import ShowTask from "./ShowTask";
 
 const FocusTimer = (props) => {
   //   const [mode, setMode] = useState("focus");
+  const [minute, setMinute] = useState(props.mintimer);
+  const [hour, setHour] = useState(props.hrtimer);
+  const [second, setSecond] = useState(props.sectimer);
+  const [initialTotalSeconds, setInitialTotalSeconds] = useState(
+    props.hrtimer * 3600 + props.mintimer * 60 + props.sectimer
+  );
 
-  const minSecTimer = props.mintimer * 60;
+  const setTimerFucntion = (hr, min, sec) => {
+    const h = parseInt(hr) || 0;
+    const m = parseInt(min) || 0;
+    const s = parseInt(sec) || 0;
 
-  const hrSecTimer = (props.hrtimer * 60) * 60;
+    setHour(hr);
+    setMinute(min);
+    setSecond(sec);
 
-  const totalTimer = minSecTimer + hrSecTimer + props.sectimer;
+    const newTotalSeconds = h * 3600 + m * 60 + s;
+    setTimer(newTotalSeconds);
+
+    const newTotal = h * 3600 + m * 60 + s;
+    setInitialTotalSeconds(newTotal);
+    setTimer(newTotal);   
+  };
+
+  const minSecTimer = minute * 60;
+
+  const hrSecTimer = hour * 60 * 60;
+
+  const totalTimer = hrSecTimer + minSecTimer + second;
 
   const [timer, setTimer] = useState(totalTimer);
   const [smallBreak, setSmallBreak] = useState(5);
@@ -23,8 +47,16 @@ const FocusTimer = (props) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [IsTaskSelectorOpen, setIsTaskSelectorOpen] = useState(false);
   const [isFocusOpen, setIsFocusOpen] = useState(false);
+  const [isTaskSelectorOpen, setisTaskSelectorOpen] = useState(false);
 
-  const [valTrueUse, setValTrueUse] = useState(true)
+  const resetPromo = () => {
+    setHour(0);
+    setMinute(25);
+    setSecond(0);
+    setTimer(1500)
+    setInitialTotalSeconds(1500);
+  }
+  
 
   const breakTimer = smallBreak * 60;
 
@@ -55,20 +87,29 @@ const FocusTimer = (props) => {
     setIsActive(false);
     setIsBreak(false);
     setTimer(totalTimer);
+    const resetTotal = hour * 3600 + minute * 60 + second;
+    setTimer(resetTotal);
   };
 
   const totalTime = isBreak ? breakTimer : totalTimer;
 
-  const minutes = Math.floor(timer / 60);
+
+  const displayHours = Math.floor(timer / 3600);
+  const minutes = Math.floor((timer % 3600) / 60);
   const seconds = timer % 60;
-  const displayTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+  const displayTime = displayHours > 0 
+    ? `${String(displayHours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+    : `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   const size = 300;
   const strokeWidth = 8;
   const center = size / 2;
   const radius = center - strokeWidth;
   const circumference = 2 * Math.PI * radius;
-  const percentage = (timer / totalTime) * 100;
+  const totalDurationForProgress = isBreak ? (5 * 60) : initialTotalSeconds;
+  const percentage = (timer / totalDurationForProgress) * 100;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
 
   return (
     <div className="display displayColumn alignItemsC justifyItemsC gap-24">
@@ -149,6 +190,7 @@ const FocusTimer = (props) => {
             handleReset();
             setIsPlayForm(true);
             setIsPlayTimer(false);
+            resetPromo()
           }}
           className="btnOutlineBorder btnTimerUses"
         >
@@ -179,6 +221,7 @@ const FocusTimer = (props) => {
                 setIsFocusOpen(true);
                 setIsTaskSelectorOpen(false);
               }}
+              TaskSelector={() => setisTaskSelectorOpen(true)}
             />
           </div>
         </div>
@@ -192,7 +235,23 @@ const FocusTimer = (props) => {
                 setIsPlayForm(false);
                 setIsPlayTimer(true);
               }}
-              valTrue={() => {return true}}
+              valTrue={() => {
+                return true;
+              }}
+              setTimerFucntion={setTimerFucntion}
+            />
+          </div>
+        </div>
+      )}
+      {isTaskSelectorOpen && (
+        <div className="backdrop" onClick={() => false}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <ShowTask
+              onClose={() => setisTaskSelectorOpen(false)}
+              changeTimerBtn={() => {
+                setIsPlayForm(false);
+                setIsPlayTimer(true);
+              }}
             />
           </div>
         </div>
