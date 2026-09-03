@@ -81,6 +81,7 @@ const TaskPage = () => {
                 completed={task.completed}
                 completeTask={completeTask}
                 focusSession={task.focusSession}
+                focusSessionTimer={task.focusSessionTimer}
               />
             );
           })}
@@ -115,6 +116,7 @@ const TaskPage = () => {
                 completed={task.completed}
                 completeTask={completeTask}
                 focusSession={task.focusSessions}
+                focusSessionTimer={task.focusSessionTimer}
               />
             );
           })}
@@ -148,6 +150,7 @@ const TaskPage = () => {
                 completed={task.completed}
                 completeTask={completeTask}
                 focusSession={task.focusSession}
+                focusSessionTimer={task.focusSessionTimer}
               />
             );
           })}
@@ -178,6 +181,7 @@ const TaskPage = () => {
                   tag={task.tags}
                   completed={task.completed}
                   focusSession={task.focusSession}
+                  focusSessionTimer={task.focusSessionTimer}
                 />
               );
             })}

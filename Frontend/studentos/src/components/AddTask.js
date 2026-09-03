@@ -11,7 +11,7 @@ const AddTask = ({ onClose }) => {
   const [IsMin, setIsMin] = useState(0);
   const [IsSec, setIsSec] = useState(0);
 
-  const time = IsHr * 60 + IsMin;
+  const time = Number((IsHr * 60)+ (IsMin));
 
   const [formData, setFormData] = useState({
     title: "",
@@ -206,7 +206,7 @@ const AddTask = ({ onClose }) => {
                   max="23"
                   placeholder="HH"
                   name="duration"
-                  onChange={(e) => setIsHr(e.target.value)}
+                  onChange={(e) => setIsHr(Number(e.target.value) || 0)}
                 />
                 <span>:</span>
                 <input
@@ -215,7 +215,7 @@ const AddTask = ({ onClose }) => {
                   min="0"
                   max="59"
                   placeholder="MM"
-                  onChange={(e) => setIsMin(e.target.value)}
+                  onChange={(e) => setIsMin(Number(e.target.value) || 0)}
                 />
                 <span>:</span>
                 <input
@@ -224,7 +224,7 @@ const AddTask = ({ onClose }) => {
                   min="0"
                   max="59"
                   placeholder="SS"
-                  onChange={(e) => setIsSec(e.target.value)}
+                  onChange={(e) => setIsSec(Number(e.target.value) || 0)}
                 />
               </div>
             </div>

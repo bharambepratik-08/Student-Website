@@ -3,7 +3,19 @@ import TaskContext from "../../context/tasks/TaskContext";
 import EditTask from "../Tasks/EditTask";
 
 const TasksCard = (props) => {
-  const { id, title, description, priority, due, time, tag, catogery, completed, focusSession } = props;
+  const {
+    id,
+    title,
+    description,
+    priority,
+    due,
+    time,
+    tag,
+    catogery,
+    completed,
+    focusSession,
+    focusSessionTimer
+  } = props;
   const context = useContext(TaskContext);
   const { deleteTask, completeTask, editTask } = context;
 
@@ -83,14 +95,16 @@ const TasksCard = (props) => {
       style={{ borderLeft: `6px ${borderColor()} solid` }}
     >
       <div className="TaskCardBTN display displayColumn gap-12">
-        {!completed && <button
-          className="btnOutlineBorder TaskCardSpcBtn"
-          onClick={() => {
-            completeTask(id); // to make the task completed
-          }}
-        >
-          <i class="fa-solid fa-check"></i>
-        </button>}
+        {!completed && (
+          <button
+            className="btnOutlineBorder TaskCardSpcBtn"
+            onClick={() => {
+              completeTask(id); // to make the task completed
+            }}
+          >
+            <i class="fa-solid fa-check"></i>
+          </button>
+        )}
         <button
           className="btnOutlineBorder TaskCardSpcBtn"
           onClick={() => {
@@ -99,47 +113,60 @@ const TasksCard = (props) => {
         >
           <i class="fa-solid fa-trash"></i>
         </button>
-        {!completed && <button
-          className="btnOutlineBorder TaskCardSpcBtn"
-          onClick={() => {
-            setIsEditTaskOpen(true);
-          }}
-        >
-          <i class="fa-solid fa-pen"></i>
-        </button>}
-        {focusSession && !completed &&
-         <button
-          className="btnOutlineBorder TaskCardSpcBtn"
-        >
-          <i class="fa-solid fa-stopwatch"></i>
-        </button>}
+        {!completed && (
+          <button
+            className="btnOutlineBorder TaskCardSpcBtn"
+            onClick={() => {
+              setIsEditTaskOpen(true);
+            }}
+          >
+            <i class="fa-solid fa-pen"></i>
+          </button>
+        )}
+        {focusSession && !completed && (
+          <button className="btnOutlineBorder TaskCardSpcBtn">
+            <i class="fa-solid fa-stopwatch"></i>
+          </button>
+        )}
       </div>
       <div className="padding-8 TaskCardDetails">
         <div className="TaskCardTitle display alignItemsC padding-4 gap-8">
           <h4>{title}</h4>
-          {completed && <div className="CompletedStatus borderRadius-16">
-            <p>completed</p>
-          </div>}
+          {completed && (
+            <div className="CompletedStatus borderRadius-16">
+              <p>completed</p>
+            </div>
+          )}
         </div>
         <div className="TaskCardDescription padding-4">
           <p className="TaskCardDescriptionPTag">{description}</p>
         </div>
-        <div className="TaskCardInformationBox display alignItemsC gap-8">
-          <div
-            className="InformationBox PriorityCard borderRadius-8 display alignItemsC justifyItemsC"
-            style={{ backgroundColor: `${borderColor()}80` }}
-          >
-            <p className="TaskCardDetailsPTag">
-              {PrefixPriority()} {priority}
-            </p>
+        <div className="TaskCardInformationBox display displayColumn gap-8">
+          <div className="display alignItemsC gap-8">
+            <div
+              className="InformationBox PriorityCard borderRadius-8 display alignItemsC justifyItemsC"
+              style={{ backgroundColor: `${borderColor()}80` }}
+            >
+              <p className="TaskCardDetailsPTag">
+                {PrefixPriority()} {priority}
+              </p>
+            </div>
+            {tagBox()}
+            <div className="InformationBox borderRadius-8 display alignItemsC justifyItemsC">
+              <p className="TaskCardDetailsPTag TaskPTagColor">
+                {formattedTime}
+              </p>
+            </div>
+            <div className="InformationBox borderRadius-8 display alignItemsC justifyItemsC">
+              <p className="TaskCardDetailsPTag TaskPTagColor">
+                {formattedDue}
+              </p>
+            </div>
           </div>
-          {tagBox()}
+          {focusSessionTimer && 
           <div className="InformationBox borderRadius-8 display alignItemsC justifyItemsC">
-            <p className="TaskCardDetailsPTag TaskPTagColor">{formattedTime}</p>
-          </div>
-          <div className="InformationBox borderRadius-8 display alignItemsC justifyItemsC">
-            <p className="TaskCardDetailsPTag TaskPTagColor">{formattedDue}</p>
-          </div>
+            <p className="TaskCardDetailsPTag TaskPTagColor">{focusSessionTimer}</p>
+          </div>}
         </div>
       </div>
 

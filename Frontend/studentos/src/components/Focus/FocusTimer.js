@@ -30,6 +30,19 @@ const FocusTimer = (props) => {
     setTimer(newTotal);   
   };
 
+  const timerSettingProps = (v) => {
+
+    const minutes = Math.floor(v / 60);
+    const minutess = (v - minutes * 60);
+
+    setHour(minutes);
+    setMinute(minutess);
+
+    const x = Number(Number(Number(minutes) * 3600) + Number(Number(minutess) * 60));
+
+    setTimer(x);
+  }
+
   const minSecTimer = minute * 60;
 
   const hrSecTimer = hour * 60 * 60;
@@ -47,7 +60,7 @@ const FocusTimer = (props) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [IsTaskSelectorOpen, setIsTaskSelectorOpen] = useState(false);
   const [isFocusOpen, setIsFocusOpen] = useState(false);
-  const [isTaskSelectorOpen, setisTaskSelectorOpen] = useState(false);
+  const [isTaskSelectorOpenForm, setisTaskSelectorOpenForm] = useState(false);
 
   const resetPromo = () => {
     setHour(0);
@@ -221,13 +234,13 @@ const FocusTimer = (props) => {
                 setIsFocusOpen(true);
                 setIsTaskSelectorOpen(false);
               }}
-              TaskSelector={() => setisTaskSelectorOpen(true)}
+              TaskSelector={() => setisTaskSelectorOpenForm(true)}
             />
           </div>
         </div>
       )}
       {isFocusOpen && (
-        <div className="backdrop" onClick={() => false}>
+        <div className="backdrop" onClick={() => setIsFormOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <FocusForm
               onClose={() => setIsFocusOpen(false)}
@@ -243,14 +256,17 @@ const FocusTimer = (props) => {
           </div>
         </div>
       )}
-      {isTaskSelectorOpen && (
-        <div className="backdrop" onClick={() => false}>
+      {isTaskSelectorOpenForm && (
+        <div className="backdrop" onClick={() => setisTaskSelectorOpenForm(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <ShowTask
-              onClose={() => setisTaskSelectorOpen(false)}
+              onClose={() => setisTaskSelectorOpenForm(false)}
               changeTimerBtn={() => {
                 setIsPlayForm(false);
                 setIsPlayTimer(true);
+              }}
+              timerSetting={() => {
+                timerSettingProps()
               }}
             />
           </div>

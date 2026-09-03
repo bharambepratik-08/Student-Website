@@ -1,13 +1,24 @@
 import React, { useContext } from "react";
 import TaskContext from "../../context/tasks/TaskContext";
 
-const ShowTask = ({ onClose }) => {
+const ShowTask = ({ onClose, timerSetting }) => {
   const context = useContext(TaskContext);
   const { tasks, completeTask } = context;
 
   const selectiveList = tasks.filter((task) => {
     return !task.completed && task.focusSession;
   });
+
+  const timeExpansion = (v) => {
+    const  timing = v;
+    if (timing >= 60) {
+      const minutes = Math.floor(timing / 60);
+      const minutess = (timing - minutes * 60);
+      return `${minutes}h ${minutess}m`;
+    } else {
+      return `${timing}m`;
+    }
+  }
 
   return (
     <div className="ShowTaskSelectorForm display displayColumn borderRadius-8 padding-24 gap-24">
@@ -27,13 +38,13 @@ const ShowTask = ({ onClose }) => {
           session task will be marked up completed
         </p>
       </div>
-      <div className="TaskListSelectorFocus">
+      <div className="TaskListSelectorFocus display displayColumn gap-12">
         {selectiveList.map((task) => {
           return (
-            <button className="taskSelectorButtonFocus btnOutlineBorder borderRadius-8 padding-12">
+            <button className="taskSelectorButtonFocus btnOutlineBorder borderRadius-8 padding-12" onClick={() => {onClose(); timerSetting(task.focusSessionTimer);}}>
               <div className="taskSelectorDivFocus display alignItemsC justifyItemsSpaceBtw">
                 <h3>{task.title}</h3>
-                <h3>time(TODO)</h3>
+                <h3>{timeExpansion(task.focusSessionTimer)}</h3>
               </div>
             </button>
           );
