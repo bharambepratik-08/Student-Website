@@ -14,6 +14,10 @@ const FocusSchema = new Schema ({
         type: String,
         required: true
     },
+    breakDuration: {
+        type:String,
+        required: true
+    },
     date:{
         type: Date,
         default: Date.now

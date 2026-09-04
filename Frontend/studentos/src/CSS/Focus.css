@@ -81,3 +81,8 @@
 .SetTimerTaskFocus {
     padding: 12px 0;
 }
+
+.TaskDurationInput {
+    box-sizing: border-box;
+    border: 2px var(--outline) solid;
+}

@@ -5,12 +5,13 @@ const FocusState = (props) => {
   const host = "http://localhost:5000";
   const [focusSession, setFocusSession] = useState([]);
 
-  // Add a task
+  // Add a focus session
 
   const addFocusSession = async (
     title,
     description,
-    duration
+    duration,
+    breakDuration
   ) => {
     const response = await fetch(`${host}/api/focus/addFocusSession`, {
       method: "POST",
@@ -21,7 +22,8 @@ const FocusState = (props) => {
       body: JSON.stringify({
         title,
         description,
-        duration
+        duration,
+        breakDuration
       }),
     });
 

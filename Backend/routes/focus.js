@@ -18,7 +18,8 @@ router.post(
       const {
         title,
         description,
-        duration
+        duration,
+        breakDuration
       } = req.body;
 
       // For errors return bad request
@@ -31,6 +32,7 @@ router.post(
         title,
         description,
         duration,
+        breakDuration,
         user: req.user.id,
       });
 

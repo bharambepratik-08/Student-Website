@@ -7,7 +7,7 @@ const Focus = () => {
   
   return (
     <div className='FocusPage padding-24 display displayColumn alignItemsC justifyItemsC'>
-      <FocusTimer hrtimer={0} mintimer={25} sectimer={0} />
+      <FocusTimer hrtimer={0} mintimer={25} sectimer={0} Brkhrtimer={0} Brkmintimer={5} Brksectimer={0} />
     </div>
   )
 }

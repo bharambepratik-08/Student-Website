@@ -5,51 +5,70 @@ import FocusForm from "./FocusForm";
 import ShowTask from "./ShowTask";
 
 const FocusTimer = (props) => {
-  //   const [mode, setMode] = useState("focus");
+  const [mode, setMode] = useState("focus");
   const [minute, setMinute] = useState(props.mintimer);
   const [hour, setHour] = useState(props.hrtimer);
   const [second, setSecond] = useState(props.sectimer);
+  
+  const [Brkminute, setBrkMinute] = useState(props.Brkmintimer);
+  const [Brkhour, setBrkHour] = useState(props.Brkhrtimer);
+  const [Brksecond, setBrkSecond] = useState(props.Brksectimer);
+  
   const [initialTotalSeconds, setInitialTotalSeconds] = useState(
-    props.hrtimer * 3600 + props.mintimer * 60 + props.sectimer
+    props.hrtimer * 3600 + props.mintimer * 60 + props.sectimer,
   );
-
+  
+  const brkTimerhr = Brkhour * 60;
+  const brkTotalTimer = brkTimerhr + Brkminute;
+  
   const setTimerFucntion = (hr, min, sec) => {
     const h = parseInt(hr) || 0;
     const m = parseInt(min) || 0;
     const s = parseInt(sec) || 0;
-
+    
     setHour(hr);
     setMinute(min);
     setSecond(sec);
-
+    
     const newTotalSeconds = h * 3600 + m * 60 + s;
     setTimer(newTotalSeconds);
-
-    const newTotal = h * 3600 + m * 60 + s;
-    setInitialTotalSeconds(newTotal);
-    setTimer(newTotal);   
+    setInitialTotalSeconds(newTotalSeconds);
+    setTimer(newTotalSeconds);
   };
-
+  
+  const setBrkFucntion = (hr, min, sec) => {
+    const h = parseInt(hr) || 0;
+    const m = parseInt(min) || 0;
+    const s = parseInt(sec) || 0;
+    
+    setBrkHour(hr);
+    setBrkMinute(min);
+    setBrkSecond(sec);
+    
+    const newTotalSeconds = h * 3600 + m * 60 + s;
+    setSmallBreak(newTotalSeconds);
+    setSmallBreak(newTotalSeconds);
+  };
+  
   const timerSettingProps = (v) => {
-
     const minutes = Math.floor(v / 60);
-    const minutess = (v - minutes * 60);
-
+    const minutess = v - minutes * 60;
+    
     setHour(minutes);
     setMinute(minutess);
-
-    const x = Number(Number(Number(minutes) * 3600) + Number(Number(minutess) * 60));
-
+    
+    const x = parseInt(Number(minutes) * 3600 + Number(minutess) * 60);
+    
     setTimer(x);
-  }
-
+    setInitialTotalSeconds(x);
+  };
+  
   const minSecTimer = minute * 60;
-
   const hrSecTimer = hour * 60 * 60;
-
+  
   const totalTimer = hrSecTimer + minSecTimer + second;
-
   const [timer, setTimer] = useState(totalTimer);
+
   const [smallBreak, setSmallBreak] = useState(5);
 
   const [isActive, setIsActive] = useState(false);
@@ -66,10 +85,9 @@ const FocusTimer = (props) => {
     setHour(0);
     setMinute(25);
     setSecond(0);
-    setTimer(1500)
+    setTimer(1500);
     setInitialTotalSeconds(1500);
-  }
-  
+  };
 
   const breakTimer = smallBreak * 60;
 
@@ -83,12 +101,6 @@ const FocusTimer = (props) => {
     } else if (isActive && timer === 0) {
       clearInterval(timerId);
       setIsBreak(!isBreak);
-      setTimer(!isBreak ? breakTimer : totalTimer);
-      alert(
-        isBreak
-          ? "Break is over! Time to focus."
-          : "Work session done! Take a break.",
-      );
     }
 
     return () => {
@@ -106,23 +118,32 @@ const FocusTimer = (props) => {
 
   const totalTime = isBreak ? breakTimer : totalTimer;
 
-
   const displayHours = Math.floor(timer / 3600);
   const minutes = Math.floor((timer % 3600) / 60);
   const seconds = timer % 60;
 
-  const displayTime = displayHours > 0 
-    ? `${String(displayHours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
-    : `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  const displayTime =
+    displayHours > 0
+      ? `${String(displayHours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+      : `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   const size = 300;
   const strokeWidth = 8;
   const center = size / 2;
   const radius = center - strokeWidth;
   const circumference = 2 * Math.PI * radius;
-  const totalDurationForProgress = isBreak ? (5 * 60) : initialTotalSeconds;
+  const totalDurationForProgress = isBreak ? brkTotalTimer : initialTotalSeconds;
   const percentage = (timer / totalDurationForProgress) * 100;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
+  const PlayTrueFalse = () => {
+    if (isPlayForm) {
+      setIsPlayForm(false);
+      setIsPlayTimer(true);
+    } else if (isPlayTimer) {
+      setIsPlayForm(true);
+      setIsPlayTimer(false);
+    }
+  };
 
   return (
     <div className="display displayColumn alignItemsC justifyItemsC gap-24">
@@ -201,9 +222,8 @@ const FocusTimer = (props) => {
         <button
           onClick={() => {
             handleReset();
-            setIsPlayForm(true);
-            setIsPlayTimer(false);
-            resetPromo()
+            PlayTrueFalse();
+            resetPromo();
           }}
           className="btnOutlineBorder btnTimerUses"
         >
@@ -217,8 +237,7 @@ const FocusTimer = (props) => {
               onClose={() => setIsFormOpen(false)}
               NextForm={() => setIsTaskSelectorOpen(true)}
               PlayBtn={() => {
-                setIsPlayForm(false);
-                setIsPlayTimer(true);
+                PlayTrueFalse();
               }}
             />
           </div>
@@ -245,28 +264,31 @@ const FocusTimer = (props) => {
             <FocusForm
               onClose={() => setIsFocusOpen(false)}
               changeTimerBtn={() => {
-                setIsPlayForm(false);
-                setIsPlayTimer(true);
+                PlayTrueFalse();
               }}
               valTrue={() => {
                 return true;
               }}
               setTimerFucntion={setTimerFucntion}
+              setBrkFucntion={setBrkFucntion}
             />
           </div>
         </div>
       )}
       {isTaskSelectorOpenForm && (
-        <div className="backdrop" onClick={() => setisTaskSelectorOpenForm(false)}>
+        <div
+          className="backdrop"
+          onClick={() => setisTaskSelectorOpenForm(false)}
+        >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <ShowTask
               onClose={() => setisTaskSelectorOpenForm(false)}
               changeTimerBtn={() => {
-                setIsPlayForm(false);
-                setIsPlayTimer(true);
+                PlayTrueFalse();
               }}
-              timerSetting={() => {
-                timerSettingProps()
+              timerSetting={(v) => {
+                timerSettingProps(v);
+                PlayTrueFalse();
               }}
             />
           </div>
