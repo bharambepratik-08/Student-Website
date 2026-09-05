@@ -6,66 +6,64 @@ import ShowTask from "./ShowTask";
 
 const FocusTimer = (props) => {
   const [mode, setMode] = useState("focus");
-  const [minute, setMinute] = useState(props.mintimer);
-  const [hour, setHour] = useState(props.hrtimer);
-  const [second, setSecond] = useState(props.sectimer);
-  
-  const [Brkminute, setBrkMinute] = useState(props.Brkmintimer);
-  const [Brkhour, setBrkHour] = useState(props.Brkhrtimer);
-  const [Brksecond, setBrkSecond] = useState(props.Brksectimer);
-  
+  const [minute, setMinute] = useState(props.mintimer); // to set up the minutes 
+  const [hour, setHour] = useState(props.hrtimer); // to set up the hours 
+  const [second, setSecond] = useState(props.sectimer); // to set up the seconds 
+
+  const [Brkminute, setBrkMinute] = useState(props.Brkmintimer); // to set up the minutes for the break 
+  const [Brkhour, setBrkHour] = useState(props.Brkhrtimer); // to set up the hours for the break 
+  const [Brksecond, setBrkSecond] = useState(props.Brksectimer); // to set up the seconds for the break 
+
   const [initialTotalSeconds, setInitialTotalSeconds] = useState(
     props.hrtimer * 3600 + props.mintimer * 60 + props.sectimer,
-  );
-  
-  const brkTimerhr = Brkhour * 60;
+  ); // sets up the timer inital start for the focus session 
+
+  const brkTimerhr = Brkhour * 60; 
   const brkTotalTimer = brkTimerhr + Brkminute;
-  
+
   const setTimerFucntion = (hr, min, sec) => {
     const h = parseInt(hr) || 0;
     const m = parseInt(min) || 0;
     const s = parseInt(sec) || 0;
-    
+
     setHour(hr);
     setMinute(min);
     setSecond(sec);
-    
+
     const newTotalSeconds = h * 3600 + m * 60 + s;
+
     setTimer(newTotalSeconds);
     setInitialTotalSeconds(newTotalSeconds);
-    setTimer(newTotalSeconds);
-  };
-  
+  }; // used to set the new focus session timer 
+
   const setBrkFucntion = (hr, min, sec) => {
     const h = parseInt(hr) || 0;
     const m = parseInt(min) || 0;
     const s = parseInt(sec) || 0;
-    
     setBrkHour(hr);
     setBrkMinute(min);
     setBrkSecond(sec);
-    
-    const newTotalSeconds = h * 3600 + m * 60 + s;
-    setSmallBreak(newTotalSeconds);
-    setSmallBreak(newTotalSeconds);
-  };
-  
+
+    const totalBreakSeconds = h * 3600 + m * 60 + s;
+    setSmallBreak(totalBreakSeconds);
+  }; // used to set the new break session timer 
+
   const timerSettingProps = (v) => {
     const minutes = Math.floor(v / 60);
     const minutess = v - minutes * 60;
-    
+
     setHour(minutes);
     setMinute(minutess);
-    
+
     const x = parseInt(Number(minutes) * 3600 + Number(minutess) * 60);
-    
+
     setTimer(x);
     setInitialTotalSeconds(x);
-  };
-  
+  }; // used as props to pass on 
+
   const minSecTimer = minute * 60;
   const hrSecTimer = hour * 60 * 60;
-  
+
   const totalTimer = hrSecTimer + minSecTimer + second;
   const [timer, setTimer] = useState(totalTimer);
 
@@ -76,11 +74,13 @@ const FocusTimer = (props) => {
 
   const [isPlayTimer, setIsPlayTimer] = useState(false);
   const [isPlayForm, setIsPlayForm] = useState(true);
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [IsTaskSelectorOpen, setIsTaskSelectorOpen] = useState(false);
-  const [isFocusOpen, setIsFocusOpen] = useState(false);
-  const [isTaskSelectorOpenForm, setisTaskSelectorOpenForm] = useState(false);
+  const [isSaveToHistoryFocusSession, setisSaveToHistoryFocusSession] = useState(false); // for the SaveToHistoryFocusSession.js
+  const [isFocusTaskExistForm, setisFocusTaskExistForm] = useState(false); // for the FocusTaskExistForm.js
+  const [isFocusForm, setisFocusForm] = useState(false); // for the FocusForm.js
+  const [isShowTask, setisShowTask] = useState(false); // for the ShowTask.js
 
+  
+  // resets the stopwatch to the promodo 
   const resetPromo = () => {
     setHour(0);
     setMinute(25);
@@ -100,13 +100,20 @@ const FocusTimer = (props) => {
       }, 1000);
     } else if (isActive && timer === 0) {
       clearInterval(timerId);
-      setIsBreak(!isBreak);
+      if (!isBreak) {
+        setIsBreak(true);
+        setTimer(smallBreak);
+      } else {
+        setIsBreak(false);
+        setIsActive(false);
+        setTimer(totalTimer);
+      }
     }
 
     return () => {
       if (timerId) clearInterval(timerId);
     };
-  }, [isActive, isBreak, timer, breakTimer, totalTimer]);
+  }, [isActive, isBreak, timer, breakTimer, totalTimer, smallBreak]);
 
   const handleReset = () => {
     setIsActive(false);
@@ -117,6 +124,8 @@ const FocusTimer = (props) => {
   };
 
   const totalTime = isBreak ? breakTimer : totalTimer;
+
+  // below code is for the stopwatch that we see on the website in focus session 
 
   const displayHours = Math.floor(timer / 3600);
   const minutes = Math.floor((timer % 3600) / 60);
@@ -131,10 +140,14 @@ const FocusTimer = (props) => {
   const center = size / 2;
   const radius = center - strokeWidth;
   const circumference = 2 * Math.PI * radius;
-  const totalDurationForProgress = isBreak ? brkTotalTimer : initialTotalSeconds;
+  const totalDurationForProgress = isBreak
+    ? smallBreak
+    : initialTotalSeconds;
   const percentage = (timer / totalDurationForProgress) * 100;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
+
+  // used to convert the play button to start and again for the form to open 
   const PlayTrueFalse = () => {
     if (isPlayForm) {
       setIsPlayForm(false);
@@ -203,7 +216,7 @@ const FocusTimer = (props) => {
           <button
             className="btnOutlineBorder btnTimerUses"
             onClick={() => {
-              setIsFormOpen(true);
+              setisSaveToHistoryFocusSession(true);
             }}
           >
             <i className="fa-solid fa-play"></i>
@@ -230,12 +243,14 @@ const FocusTimer = (props) => {
           <i className="fa-solid fa-rotate-left"></i>
         </button>
       </div>
-      {isFormOpen && (
-        <div className="backdrop" onClick={() => setIsFormOpen(false)}>
+
+      {/* First page asking whether to save the focus session or not*/}
+      {isSaveToHistoryFocusSession && (
+        <div className="backdrop" onClick={() => setisSaveToHistoryFocusSession(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <SaveToHistoryFocusSession
-              onClose={() => setIsFormOpen(false)}
-              NextForm={() => setIsTaskSelectorOpen(true)}
+              onClose={() => setisSaveToHistoryFocusSession(false)}
+              NextForm={() => setisFocusTaskExistForm(true)}
               PlayBtn={() => {
                 PlayTrueFalse();
               }}
@@ -244,25 +259,28 @@ const FocusTimer = (props) => {
         </div>
       )}
 
-      {IsTaskSelectorOpen && (
-        <div className="backdrop" onClick={() => setIsTaskSelectorOpen(false)}>
+      {/* If Yes to save the focus session then it will procced here to ask whether to add new focus session or work on a task */}
+      {isFocusTaskExistForm && (
+        <div className="backdrop" onClick={() => setisFocusTaskExistForm(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <FocusTaskExistForm
-              onClose={() => setIsTaskSelectorOpen(false)}
+              onClose={() => setisFocusTaskExistForm(false)}
               OpenNext={() => {
-                setIsFocusOpen(true);
-                setIsTaskSelectorOpen(false);
+                setisFocusForm(true);
+                setisFocusTaskExistForm(false);
               }}
-              TaskSelector={() => setisTaskSelectorOpenForm(true)}
+              TaskSelector={() => setisShowTask(true)}
             />
           </div>
         </div>
       )}
-      {isFocusOpen && (
-        <div className="backdrop" onClick={() => setIsFormOpen(false)}>
+
+      {/* If user wants to add the focus session then he can add it via this form */}
+      {isFocusForm && (
+        <div className="backdrop" onClick={() => setisSaveToHistoryFocusSession(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <FocusForm
-              onClose={() => setIsFocusOpen(false)}
+              onClose={() => setisFocusForm(false)}
               changeTimerBtn={() => {
                 PlayTrueFalse();
               }}
@@ -275,14 +293,16 @@ const FocusTimer = (props) => {
           </div>
         </div>
       )}
-      {isTaskSelectorOpenForm && (
+
+      {/* If user wants to work on a existing task then he can select from list */}
+      {isShowTask && (
         <div
           className="backdrop"
-          onClick={() => setisTaskSelectorOpenForm(false)}
+          onClick={() => setisShowTask(false)}
         >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <ShowTask
-              onClose={() => setisTaskSelectorOpenForm(false)}
+              onClose={() => setisShowTask(false)}
               changeTimerBtn={() => {
                 PlayTrueFalse();
               }}

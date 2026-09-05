@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
-const FocusConetxt = createContext();
+const FocusConetext = createContext();
 
 
 
-export default FocusConetxt;
+export default FocusConetext;

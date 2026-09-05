@@ -45,4 +45,16 @@ router.post(
   },
 );
 
+// Route: GET "/api/focus/fetchAllFocusSession". Login required
+router.get("/fetchAllFocusSession", fetchuser, async (req, res) => {
+  try {
+    // Find sessions belonging to the logged-in user
+    const focusSessions = await Focus.find({ user: req.user.id });
+    res.json(focusSessions);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 module.exports = router;

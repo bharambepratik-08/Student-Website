@@ -32,7 +32,7 @@ const SaveToHistoryFocusSession = ({ onClose, PlayBtn, NextForm }) => {
           }}
         >
           <i className="fa-solid fa-x"></i>
-          <h3>No, Start with saving</h3>
+          <h3>No, Start without saving</h3>
         </button>
       </div>
     </div>

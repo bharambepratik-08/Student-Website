@@ -86,3 +86,10 @@
     box-sizing: border-box;
     border: 2px var(--outline) solid;
 }
+
+.displayHistoryFocussSession {
+    background-color: var(--surface);
+    border: 2px var(--text-secondary) solid;
+    max-height: 500px;
+    max-width: 1000px;
+}
