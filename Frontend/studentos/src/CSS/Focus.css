@@ -25,6 +25,7 @@
     height: 100%;
     background-color: var(--surface-container-low);
     box-sizing: border-box;
+    gap: 80px;
 }
 
 .btnTimerUses {
@@ -90,6 +91,51 @@
 .displayHistoryFocussSession {
     background-color: var(--surface);
     border: 2px var(--text-secondary) solid;
-    max-height: 500px;
+    min-width: 500px;
+    max-height: 700px;
     max-width: 1000px;
+}
+
+.focusSessionHistoryLogoComplete { 
+    color: var(--on-secondary-fixed-variant);
+    background-color: var(--secondary-container);
+    height: 36px;
+    width: 36px;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.recentSessionIH3 {
+    i {
+        font-size: 16px;
+    }
+}
+
+.focusDescription {
+    font-size: 12px;
+}
+
+.viewAllBtnforSessionHistory {
+    background-color: transparent;
+    font-size: 14px;
+    text-decoration: underline;
+    color: var(--on-primary-fixed-variant);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.fullHistoryDisplayPage {
+    min-width: 1000px;
+    min-height: fit-content;
+    border: 2px var(--text-secondary) solid;
+}
+
+.mainPartToHistory {
+    width: 80%;
+    background-color: var(--surface-container-low);
+}
+
+.specialHistoryFocus {
+    box-sizing: border-box;
+    width: 100%;
 }

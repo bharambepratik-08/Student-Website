@@ -53,6 +53,10 @@ const TaskSchema = new Schema ({
     focusSessionTimer: {
         type: String,
         required:false
+    },
+    brkSessionTimer: {
+        type: String,
+        required: false
     }
 })
 

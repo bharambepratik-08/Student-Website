@@ -15,9 +15,10 @@ const FocusForm = ({ onClose, changeTimerBtn, valTrue, setTimerFucntion, setBrkF
   const [Brkminute, setBrkMinute] = useState(0);
   const [Brkseconds, setBrkSeconds] = useState(0);
 
-  const timerDuration = `${hour}:${minute}:${seconds}`;
 
-  const BrktimerDuration = `${Brkhour}:${Brkminute}:${Brkseconds}`;
+  const timerDuration = Number(Number(hour * 60)+ Number(minute));
+
+  const BrktimerDuration = Number((Brkhour * 60)+ (Brkminute));
 
   const [formData, setFormData] = useState({
     title: "",

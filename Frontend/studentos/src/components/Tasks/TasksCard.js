@@ -123,11 +123,6 @@ const TasksCard = (props) => {
             <i class="fa-solid fa-pen"></i>
           </button>
         )}
-        {focusSession && !completed && (
-          <button className="btnOutlineBorder TaskCardSpcBtn">
-            <i class="fa-solid fa-stopwatch"></i>
-          </button>
-        )}
       </div>
       <div className="padding-8 TaskCardDetails">
         <div className="TaskCardTitle display alignItemsC padding-4 gap-8">

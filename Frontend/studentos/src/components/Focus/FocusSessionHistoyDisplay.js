@@ -1,34 +1,75 @@
-import React, { useContext, useEffect } from "react"; 
+import React, { useContext, useEffect, useState } from "react";
 import FocusConetext from "../../context/Focus/FocusContext";
+import FocusSessionHistoryFullPage from "./FocusSessionHistoryFullPage";
 
 const FocusSessionHistoyDisplay = () => {
   const context = useContext(FocusConetext);
-  const { focusSession, getFocusSession } = context; 
+  const { focusSession, getFocusSession } = context;
 
   useEffect(() => {
     getFocusSession();
     // eslint-disable-next-line
   }, []);
 
+  const timeExpansion = (v) => {
+    const timing = v;
+    if (timing >= 60) {
+      const minutes = Math.floor(timing / 60);
+      const minutess = timing - minutes * 60;
+      return `${minutes}h ${minutess}m`;
+    } else {
+      return `${timing}m`;
+    }
+  };
+
+  const [isDisplayHistoryFullPageOn, setisDisplayHistoryFullPageOn ] = useState(false);
+
+  const list = (focusSession || []).slice(0, 3);
+
   return (
-    <div className="displayHistoryFocussSession display displayColumn gap-12 padding-24 borderRadius-16">
-      <div>
-        <h3>Recent Session</h3>
+    <div className="displayHistoryFocussSession display displayColumn gap-24 padding-24 borderRadius-16">
+      <div className="display justifyItemsSpaceBtw alignItemsC recentSessionIH3">
+        <div className="display gap-12 alignItemsC recentSessionIH3">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <h3>Recent Session</h3>
+        </div>
+        <div>
+          <button className="btnOutlineBorder viewAllBtnforSessionHistory" onClick={() => {setisDisplayHistoryFullPageOn(true)}}>view all</button>
+        </div>
       </div>
-      <div>
-        {focusSession.map((focus) => {
-            return (
-                <div>
-                    <p>
-                        {focus.title}
-                    </p>
-                    <p>
-                        {focus.duration} / {focus.breakDuration}
-                    </p>
+      <div className="display displayColumn gap-12">
+        {list.map((focus) => {
+          return (
+            <div className="display justifyItemsSpaceBtw alignItemsC">
+              <div className="focusSessionHistoryDisplayTitle display alignItemsC gap-12">
+                <div className="focusSessionHistoryLogoComplete display alignItemsC justifyItemsC">
+                  <i className="fa-solid fa-check"></i>
                 </div>
-            )
+                <div className="display displayColumn gap-8">
+                  <p className="fontBold">{focus.title}</p>
+                  <p className="focusDescription">{focus.description}</p>
+                </div>
+              </div>
+              <p>
+                {timeExpansion(focus.duration)} /{" "}
+                {timeExpansion(focus.breakDuration)}
+              </p>
+            </div>
+          );
         })}
       </div>
+      {isDisplayHistoryFullPageOn && (
+        <div
+          className="backdrop"
+          onClick={() => setisDisplayHistoryFullPageOn(false)}
+        >
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <FocusSessionHistoryFullPage
+              onClose={() => setisDisplayHistoryFullPageOn(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

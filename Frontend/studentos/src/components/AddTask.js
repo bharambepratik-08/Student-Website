@@ -13,6 +13,12 @@ const AddTask = ({ onClose }) => {
 
   const time = Number((IsHr * 60)+ (IsMin));
 
+  const [IsHrBrk, setIsHrBrk] = useState(0);
+  const [IsMinBrk, setIsMinBrk] = useState(0);
+  const [IsSecBrk, setIsSecBrk] = useState(0);
+
+  const timeBrk = Number((IsHrBrk * 60)+ (IsMinBrk));
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -44,7 +50,8 @@ const AddTask = ({ onClose }) => {
       formData.category,
       formData.tags,
       formData.focusSession,
-      time
+      time,
+      timeBrk
     );
     if (onClose) onClose();
   };
@@ -225,6 +232,39 @@ const AddTask = ({ onClose }) => {
                   max="59"
                   placeholder="SS"
                   onChange={(e) => setIsSec(Number(e.target.value) || 0)}
+                />
+              </div>
+            </div>
+          )}
+          {formData.focusSession && (
+            <div className="SetTimerTaskFocus display alignItemsC justifyItemsSpaceBtw">
+              <div class="timer-input">
+                <input
+                  type="number"
+                  id="hours"
+                  min="0"
+                  max="23"
+                  placeholder="HH"
+                  name="Brk"
+                  onChange={(e) => setIsHrBrk(Number(e.target.value) || 0)}
+                />
+                <span>:</span>
+                <input
+                  type="number"
+                  id="minutes"
+                  min="0"
+                  max="59"
+                  placeholder="MM"
+                  onChange={(e) => setIsMinBrk(Number(e.target.value) || 0)}
+                />
+                <span>:</span>
+                <input
+                  type="number"
+                  id="seconds"
+                  min="0"
+                  max="59"
+                  placeholder="SS"
+                  onChange={(e) => setIsSecBrk(Number(e.target.value) || 0)}
                 />
               </div>
             </div>

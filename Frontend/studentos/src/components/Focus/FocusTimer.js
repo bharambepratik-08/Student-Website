@@ -161,7 +161,7 @@ const FocusTimer = (props) => {
   return (
     <div className="display displayColumn alignItemsC justifyItemsC gap-24">
       <div className="display displayColumn alignItemsC justifyItemsC gap-24">
-        <h2>{isBreak ? "Break Time" : "Focus Mode"}</h2>
+        <h1>{isBreak ? "Break Time" : "Focus Mode"}</h1>
         <div
           className="countDownDiv display alignItemsC justifyItemsC displayColumn"
           style={{ width: size + 8, height: size + 8 }}

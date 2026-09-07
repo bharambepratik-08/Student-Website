@@ -16,7 +16,8 @@ const TaskState = (props) => {
     catogery,
     tags,
     focusSession,
-    focusSessionTimer
+    focusSessionTimer,
+    brkSessionTimer
   ) => {
     const response = await fetch(`${host}/api/task/addTask`, {
       method: "POST",
@@ -33,7 +34,8 @@ const TaskState = (props) => {
         catogery,
         tags,
         focusSession,
-        focusSessionTimer
+        focusSessionTimer,
+        brkSessionTimer
       }),
     });
 
@@ -94,7 +96,8 @@ const TaskState = (props) => {
     catogery,
     tags,
     focusSession,
-    focusSessionTimer
+    focusSessionTimer,
+    brkSessionTimer
   ) => {
     const response = await fetch(`${host}/api/task/updateTask/${id}`, {
       method: "PUT",
@@ -111,7 +114,8 @@ const TaskState = (props) => {
         catogery,
         tags,
         focusSession,
-        focusSessionTimer
+        focusSessionTimer,
+        brkSessionTimer
       }),
     });
 
@@ -132,6 +136,7 @@ const TaskState = (props) => {
         element.tags = tags;
         element.focusSession = focusSession;
         element.focusSessionTimer = focusSessionTimer;
+        element.brkSessionTimer = brkSessionTimer;
         break;
       }
     }
