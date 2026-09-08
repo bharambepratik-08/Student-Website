@@ -3,16 +3,22 @@ import TaskContext from "../../context/tasks/TaskContext";
 import FocusConetext from "../../context/Focus/FocusContext";
 
 const ShowTask = ({ onClose, timerSetting }) => {
+  // context for bringing task list back
   const context = useContext(TaskContext);
-  const { tasks, completeTask } = context;
+  const { tasks } = context;
 
+  // context for adding focus session
   const contextTwo = useContext(FocusConetext);
   const { addFocusSession } = contextTwo;
 
+
+  // filtering out the needed task 
   const selectiveList = tasks.filter((task) => {
     return !task.completed && task.focusSession;
   });
 
+
+  // changing the format of time to show the simple form of time in website 
   const timeExpansion = (v) => {
     const timing = v;
     if (timing >= 60) {

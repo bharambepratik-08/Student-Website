@@ -1,9 +1,10 @@
 import React from "react";
+import TaskListDisplay from "../components/Dashboard/TaskListDisplay";
 
 const Dashboard = () => {
   return (
-    <div>
-
+    <div className="DashboardPage padding-24 display displayColumn">
+      <TaskListDisplay />
     </div>
   );
 };

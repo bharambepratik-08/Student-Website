@@ -1,0 +1,25 @@
+.taskListForDashboard {
+    background-color: var(--surface);
+}
+
+.DashboardPage {
+    height: 100%;
+    background-color: var(--surface-container-low);
+    box-sizing: border-box;
+}
+
+.dashboardViewAll {
+    text-decoration: underline;
+    color: var(--on-primary-fixed-variant);
+    font-size: 14px;
+    background-color: var(--surface);
+    cursor: pointer;
+}
+
+.taskListDashboardheader {
+    border-bottom: 1px var(--outline) solid;
+}
+
+.taskDisplayDashP {
+    font-size: 14px;
+}

@@ -125,17 +125,24 @@
 }
 
 .fullHistoryDisplayPage {
-    min-width: 1000px;
+    box-sizing: border-box;
+    min-width: 800px;
     min-height: fit-content;
     border: 2px var(--text-secondary) solid;
 }
 
 .mainPartToHistory {
-    width: 80%;
+    width: 100%;
+    box-sizing: border-box;
     background-color: var(--surface-container-low);
 }
 
 .specialHistoryFocus {
     box-sizing: border-box;
     width: 100%;
+}
+
+.topBarOfHistoryFocusPage {
+    width: 100%;
+    box-sizing: border-box;
 }

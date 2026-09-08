@@ -3,6 +3,8 @@ import FocusConetext from "../../context/Focus/FocusContext";
 import FocusSessionHistoryFullPage from "./FocusSessionHistoryFullPage";
 
 const FocusSessionHistoyDisplay = () => {
+
+  // context for getting the list for focus session
   const context = useContext(FocusConetext);
   const { focusSession, getFocusSession } = context;
 
@@ -11,6 +13,8 @@ const FocusSessionHistoyDisplay = () => {
     // eslint-disable-next-line
   }, []);
 
+
+  // changing the time format 
   const timeExpansion = (v) => {
     const timing = v;
     if (timing >= 60) {
@@ -22,7 +26,7 @@ const FocusSessionHistoyDisplay = () => {
     }
   };
 
-  const [isDisplayHistoryFullPageOn, setisDisplayHistoryFullPageOn ] = useState(false);
+  const [isDisplayHistoryFullPageOn, setisDisplayHistoryFullPageOn ] = useState(false); // for DisplayHistoryFullPage.js 
 
   const list = (focusSession || []).slice(0, 3);
 

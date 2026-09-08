@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import FocusTimer from '../components/Focus/FocusTimer'
 import ShowTask from '../components/Focus/ShowTask'
 import FocusSessionHistoyDisplay from '../components/Focus/FocusSessionHistoyDisplay'
-import FocusSessionHistoryFullPage from '../components/Focus/FocusSessionHistoryFullPage'
 
 const Focus = () => {
 

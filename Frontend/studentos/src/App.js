@@ -18,6 +18,7 @@ import "./CSS/NavBar.css";
 import "./CSS/AddTask.css";
 import "./CSS/Tasks.css";
 import "./CSS/Focus.css";
+import "./CSS/Dashboard.css"
 import MainLayout from "./Layouts/MainLayout";
 import FocusState from "./context/Focus/Focusstate";
 
