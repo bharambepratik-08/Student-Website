@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import TaskContext from "../../context/tasks/TaskContext";
 
-const TaskListDisplay = () => {
+const UpcomingTaskList = () => {
   const context = useContext(TaskContext);
   const { tasks } = context;
 
@@ -22,23 +22,6 @@ const TaskListDisplay = () => {
     }
   };
 
-  // to add ! - in the starting of the priortiy
-  const PrefixPriority = (priority) => {
-    switch (priority) {
-      case "High":
-        return "!";
-
-      case "Medium":
-        return "-";
-
-      case "Low":
-        return "";
-
-      default:
-        return "|";
-    }
-  };
-
   // to make the date in the format which comes from the server inorder to compare further
   const today = new Date();
   const year = today.getFullYear();
@@ -47,10 +30,10 @@ const TaskListDisplay = () => {
   const formattedToday = `${year}-${month}-${day}`;
 
   // to get the special list for todays task
-  const currentDate = () => {
+  const upcomingDate = () => {
     const tasklist = tasks.filter((task) => {
       const taskDateOnly = task.due.split("T")[0];
-      return taskDateOnly === formattedToday;
+      return taskDateOnly > formattedToday;
     });
 
     return (
@@ -60,14 +43,13 @@ const TaskListDisplay = () => {
             <div className="display alignItemsC padding-12 justifyItemsSpaceBtw">
               <div>
                 <h3>{task.title}</h3>
-                <p className="taskDisplayDashP">Due today at {task.time}</p>
               </div>
               <div
                 className="InformationBoxDash PriorityCard borderRadius-16 display alignItemsC justifyItemsC"
                 style={{ backgroundColor: `${borderColor(task.priority)}80` }}
               >
                 <p>
-                  {PrefixPriority(task.priority)} {task.priority}
+                  <p className="taskDisplayDashP">{task.time}</p>
                 </p>
               </div>
             </div>
@@ -80,16 +62,13 @@ const TaskListDisplay = () => {
   return (
     <div>
       <div className="display displayColumn taskListForDashboard padding-24 gap-12 borderRadius-8">
-        <div className="taskListDashboardheader padding-12 display alignItemsC justifyItemsSpaceBtw">
-          <h2>Today's Task</h2>
-          <button className="dashboardViewAll btnOutlineBorder fontBold">
-            view all
-          </button>
+        <div className="upcomingListDashboardheader padding-12 display alignItemsC">
+          <h2>Upcoming Deadlines</h2>
         </div>
-        <div>{currentDate()}</div>
+        <div>{upcomingDate()}</div>
       </div>
     </div>
   );
 };
 
-export default TaskListDisplay;
+export default UpcomingTaskList;

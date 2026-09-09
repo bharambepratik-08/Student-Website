@@ -23,3 +23,17 @@
 .taskDisplayDashP {
     font-size: 14px;
 }
+
+.InformationBoxDash {
+    height: fit-content;
+    width: fit-content;
+    box-sizing: border-box;
+    background-color: var(--border-subtle);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 12px;
+}
+
+.upcomingListForDashboard {
+    background-color: var(--surface);
+}
