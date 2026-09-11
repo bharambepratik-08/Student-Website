@@ -39,6 +39,11 @@ const UpcomingTaskList = () => {
     return (
       <div>
         {tasklist.map((task) => {
+          const formattedDue = new Date(task.due).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          });
           return (
             <div className="display alignItemsC padding-12 justifyItemsSpaceBtw">
               <div>
@@ -49,7 +54,7 @@ const UpcomingTaskList = () => {
                 style={{ backgroundColor: `${borderColor(task.priority)}80` }}
               >
                 <p>
-                  <p className="taskDisplayDashP">{task.time}</p>
+                  <p className="taskDisplayDashP">{formattedDue}</p>
                 </p>
               </div>
             </div>
@@ -60,13 +65,11 @@ const UpcomingTaskList = () => {
   };
 
   return (
-    <div>
-      <div className="display displayColumn taskListForDashboard padding-24 gap-12 borderRadius-8">
-        <div className="upcomingListDashboardheader padding-12 display alignItemsC">
-          <h2>Upcoming Deadlines</h2>
-        </div>
-        <div>{upcomingDate()}</div>
+    <div className="display displayColumn upcomingListForDashboard padding-24 gap-12 borderRadius-8">
+      <div className="upcomingListDashboardheader padding-12 display alignItemsC">
+        <h2>Upcoming Deadlines</h2>
       </div>
+      <div>{upcomingDate()}</div>
     </div>
   );
 };

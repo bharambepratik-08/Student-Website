@@ -1,5 +1,6 @@
 .taskListForDashboard {
     background-color: var(--surface);
+    width: 60%;
 }
 
 .DashboardPage {
@@ -36,4 +37,5 @@
 
 .upcomingListForDashboard {
     background-color: var(--surface);
+    width: 30%;
 }

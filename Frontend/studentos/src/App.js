@@ -18,34 +18,38 @@ import "./CSS/NavBar.css";
 import "./CSS/AddTask.css";
 import "./CSS/Tasks.css";
 import "./CSS/Focus.css";
-import "./CSS/Dashboard.css"
+import "./CSS/Dashboard.css";
+import "./CSS/Goals.css";
 import MainLayout from "./Layouts/MainLayout";
 import FocusState from "./context/Focus/Focusstate";
+import GoalState from "./context/Goals/Goalsstate";
 
 function App() {
   return (
     <TaskState>
       <FocusState>
-        <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/login" element={<Login />} />
+        <GoalState>
+          <Router>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/login" element={<Login />} />
 
-            <Route element={<MainLayout />}>
-              <Route path="/tasks" element={<Tasks />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/analytics" element={<Analytics />} />
-              <Route path="/goals" element={<Goals />} />
-              <Route path="/focus" element={<Focus />} />
-              <Route path="/notification" element={<Notification />} />
-              <Route path="/tasks" element={<Tasks />} />
-              <Route path="/setting" element={<Setting />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/addTasks" />
-            </Route>
-          </Routes>
-        </Router>
+              <Route element={<MainLayout />}>
+                <Route path="/tasks" element={<Tasks />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/goals" element={<Goals />} />
+                <Route path="/focus" element={<Focus />} />
+                <Route path="/notification" element={<Notification />} />
+                <Route path="/tasks" element={<Tasks />} />
+                <Route path="/setting" element={<Setting />} />
+                <Route path="/calendar" element={<Calendar />} />
+                <Route path="/addTasks" />
+              </Route>
+            </Routes>
+          </Router>
+        </GoalState>
       </FocusState>
     </TaskState>
   );

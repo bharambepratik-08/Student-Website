@@ -1,0 +1,14 @@
+.GoalPage {
+    height: 100vh;
+    background-color: var(--surface-container-low);
+    box-sizing: border-box;
+}
+
+.goalPageTopP {
+    color: var(--text-secondary);
+}
+
+.AddGoalForm {
+    background-color: var(--surface);
+    border: 2px var(--text-secondary) solid;
+}

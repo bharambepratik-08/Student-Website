@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import TaskContext from "../../context/tasks/TaskContext";
 
 const TaskListDisplay = () => {
   const context = useContext(TaskContext);
   const { tasks } = context;
+
+  let navigate = useNavigate();
 
   // tell the border color for the card
   const borderColor = (priority) => {
@@ -78,17 +81,15 @@ const TaskListDisplay = () => {
   };
 
   return (
-    <div>
       <div className="display displayColumn taskListForDashboard padding-24 gap-12 borderRadius-8">
         <div className="taskListDashboardheader padding-12 display alignItemsC justifyItemsSpaceBtw">
           <h2>Today's Task</h2>
-          <button className="dashboardViewAll btnOutlineBorder fontBold">
+          <button className="dashboardViewAll btnOutlineBorder fontBold" onClick={() => navigate('/tasks')}>
             view all
           </button>
         </div>
         <div>{currentDate()}</div>
       </div>
-    </div>
   );
 };
 

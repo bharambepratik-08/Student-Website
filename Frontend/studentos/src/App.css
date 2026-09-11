@@ -138,6 +138,10 @@
   justify-content: flex-end;
 }
 
+.justifyItemsSpaceEvenly {
+  justify-content: space-evenly;
+}
+
 .alignItemsFlexEnd {
   align-items: flex-end;
 }
