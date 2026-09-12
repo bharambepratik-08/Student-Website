@@ -18,6 +18,7 @@ const GoalState = (props) => {
   ) => {
     const response = await fetch(`${host}/api/goals/addGoal`, {
       method: "POST",
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"), // to identify the user

@@ -1,14 +1,48 @@
 .GoalPage {
-    height: 100vh;
-    background-color: var(--surface-container-low);
-    box-sizing: border-box;
+  height: 100vh;
+  background-color: var(--surface-container-low);
+  box-sizing: border-box;
 }
 
 .goalPageTopP {
-    color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
 .AddGoalForm {
-    background-color: var(--surface);
-    border: 2px var(--text-secondary) solid;
+  background-color: var(--surface);
+  width: fit-content;
+  height: fit-content;
+  box-sizing: border-box;
+}
+
+.GoalCard {
+  background-color: var(--surface);
+}
+
+.goalCardTag {
+  font-size: small;
+  padding: 4px 8px;
+  background-color: var(--surface-container-low);
+}
+
+.goalTitle {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.goalGrids {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.goalProgressBar {
+  background-color: var(--surface-container-low);
+}
+
+.bar-sspec {
+  width: 100%;
+  background: #2d2d2d;
+  height: 8px;
+  border-radius: 10px;
+  overflow: hidden;
 }

@@ -38,7 +38,7 @@ const AddGoal = () => {
   };
 
   return (
-    <div className="borderRadius-8 AddGoalForm padding-24 display displayColumn alignItemsC justifyItemsC">
+    <div className="borderRadius-8 AddGoalForm display displayColumn alignItemsC justifyItemsC">
       <div className="AddTaskDiv padding-24 borderRadius-16">
         <div className="UpperHeadAddTask display alignItemsC justifyItemsSpaceBtw padding-12">
           <h3>Add Goal</h3>
@@ -86,7 +86,7 @@ const AddGoal = () => {
                   <p className="AddTaskParagraph">Due Date</p>
                   <input
                     type="date"
-                    name="dueDate"
+                    name="date"
                     value={formData.date}
                     onChange={handleChange}
                     className="InputBoxDateTime padding-8"
@@ -161,7 +161,7 @@ const AddGoal = () => {
               form="addTaskFormId"
               className="addTaskBtn AddBtn btnOutlineBorder borderRadius-8"
             >
-              Add Task
+              Add Goal
             </button>
           </div>
         </div>
