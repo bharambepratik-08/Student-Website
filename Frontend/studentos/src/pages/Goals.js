@@ -16,7 +16,7 @@ const Goals = () => {
   return (
     <div className="GoalPage padding-24">
       <GoalsTopBar />
-      {/* <AddGoal />  */}
+      <AddGoal /> 
       <div className="display gap-24 alignItemsC goalGrids padding-24">
         {goals.map((goal) => {
           return (

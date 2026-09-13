@@ -30,6 +30,11 @@ const GoalSchema = new Schema ({
         type: String,
         required: true
     },
+    completed: {
+        type: Boolean,
+        required: false, 
+        default: false
+    },
     date:{
         type: Date,
         default: Date.now
