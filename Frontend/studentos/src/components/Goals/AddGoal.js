@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import GoalContext from "../../context/Goals/GoalsContext";
 
-const AddGoal = () => {
+const AddGoal = ({ onClose }) => {
   const context = useContext(GoalContext);
   const { addGoal } = context;
 
@@ -34,7 +34,7 @@ const AddGoal = () => {
       formData.category,
       formData.date,
     );
-    // if (onClose) onClose();
+    if (onClose) onClose();
   };
 
   return (
@@ -45,7 +45,7 @@ const AddGoal = () => {
           <button
             className="ClossAddTaskBtn btnOutlineBorder"
             type="button"
-            // onClick={onClose}
+            onClick={onClose}
           >
             <i className="fa-solid fa-xmark fa-xl"></i>
           </button>
@@ -150,7 +150,7 @@ const AddGoal = () => {
             <button
               type="button"
               className="btnOutlineBorder borderRadius-8 CancelBtn"
-              // onClick={onClose}
+              onClick={onClose}
             >
               Cancel
             </button>

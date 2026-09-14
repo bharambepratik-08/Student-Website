@@ -46,3 +46,11 @@
   border-radius: 10px;
   overflow: hidden;
 }
+
+.updateProgressButton {
+  padding: 4px 8px;
+  font-weight: 550;
+  cursor: pointer;
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-fixed);
+}

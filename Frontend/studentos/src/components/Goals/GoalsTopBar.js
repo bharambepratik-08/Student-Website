@@ -1,6 +1,6 @@
 import React from "react";
 
-const GoalsTopBar = () => {
+const GoalsTopBar = ({ onClick }) => {
   return (
     <div className="display alignItemsC justifyItemsSpaceEvenly">
       <div>
@@ -10,7 +10,7 @@ const GoalsTopBar = () => {
       <div>
         <button
               type="button"
-              // onClick={onOpenAddTask}
+              onClick={onClick}
               className="addTaskBtn btnOutlineBorder borderRadius-8 colorWhite display alignItemsC justifyItemsC padding-12"
             >
               <i className="fa-solid fa-plus"></i>

@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 const GoalCard = (props) => {
   const { title, tag, date, progress } = props;
 
-
   const formattedDue = new Date(date).toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "2-digit",
@@ -35,7 +34,10 @@ const GoalCard = (props) => {
           />
         </div>
       </div>
-      <div className="goalCardDateInfo padding-12">{formattedDue}</div>
+      <div className="goalCardDateInfo padding-12 display justifyItemsSpaceBtw">
+        {formattedDue}
+        <button className="btnOutlineBorder borderRadius-16 updateProgressButton">Update Progress</button>
+      </div>
     </div>
   );
 };
