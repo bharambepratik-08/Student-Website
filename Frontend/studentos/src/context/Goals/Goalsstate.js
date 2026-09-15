@@ -14,7 +14,8 @@ const GoalState = (props) => {
     tag,
     bar,
     catogery,
-    date,
+    autoProgress,
+    date
   ) => {
     const response = await fetch(`${host}/api/goals/addGoal`, {
       method: "POST",
@@ -30,7 +31,8 @@ const GoalState = (props) => {
         tag,
         bar,
         catogery,
-        date,
+        autoProgress,
+        date
       }),
     });
 
@@ -116,6 +118,35 @@ const GoalState = (props) => {
     setGoals(newgoals);
   };
 
+  // Edit a Goal's Progress
+  const updateProgress = async (id, bar) => {
+    const response = await fetch(`${host}/api/goals/updateGoal/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"), // to identify the user
+      },
+      body: JSON.stringify({
+        bar
+      }),
+    });
+
+    const json = await response.json();
+
+    // logic to edit
+
+    let newgoals = JSON.parse(JSON.stringify(goals));
+    for (let index = 0; index < newgoals.length; index++) {
+      const element = newgoals[index];
+      if (element._id === id) {
+        element.bar = bar;
+        break;
+      }
+    }
+
+    setGoals(newgoals);
+  };
+
   const completeGoal = async (id) => {
     try {
       const response = await fetch(`${host}/api/goals/completeGoal/${id}`, {
@@ -144,7 +175,7 @@ const GoalState = (props) => {
 
   return (
     <GoalContext.Provider
-      value={{ goals, addGoal, deleteGoal, editGoal, getgoals, completeGoal }}
+      value={{ goals, addGoal, deleteGoal, editGoal, getgoals, completeGoal, updateProgress }}
     >
       {props.children}
     </GoalContext.Provider>

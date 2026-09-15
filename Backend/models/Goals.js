@@ -35,6 +35,11 @@ const GoalSchema = new Schema ({
         required: false, 
         default: false
     },
+    autoProgress: {
+        type: Boolean,
+        required: false, 
+        default: false
+    },
     date:{
         type: Date,
         default: Date.now

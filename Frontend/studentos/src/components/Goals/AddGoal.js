@@ -12,7 +12,8 @@ const AddGoal = ({ onClose }) => {
     tags: "",
     bar: "",
     category: "",
-    date: "",
+    autoProgress: false,
+    date: ""
   });
 
   const handleChange = (e) => {
@@ -32,7 +33,8 @@ const AddGoal = ({ onClose }) => {
       formData.tags,
       formData.bar || 0,
       formData.category,
-      formData.date,
+      formData.autoProgress || false,
+      formData.date
     );
     if (onClose) onClose();
   };
@@ -136,8 +138,8 @@ const AddGoal = ({ onClose }) => {
               <div className="setCheckbox">
                 <input
                   type="checkbox"
-                  name="focusSession"
-                  checked={formData.focusSession}
+                  name="autoProgress"
+                  checked={formData.autoProgress}
                   onChange={handleChange}
                   className="setBtn"
                 />

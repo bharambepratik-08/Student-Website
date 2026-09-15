@@ -54,3 +54,20 @@
   background-color: var(--secondary-container);
   color: var(--on-secondary-fixed);
 }
+
+.updateProgressForm {
+  width: 600px;
+  box-sizing: border-box;
+}
+
+.upperUpdateProgress {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.updateProgressOnClickBtn {
+  padding: 4px 8px;
+  background-color: var(--secondary-fixed-dim);
+  width: 35%;
+  margin-bottom: 12px;
+}

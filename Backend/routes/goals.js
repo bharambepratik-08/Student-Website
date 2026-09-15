@@ -24,7 +24,7 @@ router.post(
   ],
   async (req, res) => {
     try {
-      const { title, description, duration, tag, bar, catogery, date } =
+      const { title, description, duration, tag, bar, catogery, autoProgress, date } =
         req.body;
 
       // For errors return bad request
@@ -40,6 +40,7 @@ router.post(
         tag,
         bar,
         catogery,
+        autoProgress,
         date,
         user: req.user.id,
       });
@@ -56,7 +57,7 @@ router.post(
 // Update a existing goal using: PUT "/api/goals/updateGoal". Login Required
 router.put("/updateGoal/:id", fetchuser, async (req, res) => {
   try {
-    const { title, description, duration, tag, bar, catogery, date } = req.body;
+    const { title, description, duration, tag, bar, catogery, autoProgress, date } = req.body;
 
     // Create a newGoal Obj
 
@@ -82,6 +83,45 @@ router.put("/updateGoal/:id", fetchuser, async (req, res) => {
     }
     if (catogery) {
       newGoal.catogery = catogery;
+    }
+    if (autoProgress) {
+      newGoal.autoProgress = autoProgress;
+    }
+
+    // Find the Goal to be updated and update it
+
+    let goal = await Goal.findById(req.params.id);
+    if (!goal) {
+      return res.status(404).send("Not Found");
+    }
+
+    if (goal.user.toString() !== req.user.id) {
+      return res.status(401).send("Not Allowed");
+    }
+
+    goal = await Goal.findByIdAndUpdate(
+      req.params.id,
+      { $set: newGoal },
+      { new: true },
+    );
+
+    res.json({ goal });
+  } catch (error) {
+    return res.status(500).send("Some error occured");
+  }
+});
+
+// Update a existing goal's progress using: PUT "/api/goals/updateProgress". Login Required
+router.put("/updateProgress/:id", fetchuser, async (req, res) => {
+  try {
+    const { bar } = req.body;
+
+    // Create a newGoal Obj
+
+    const newGoal = {};
+
+    if (bar) {
+      newGoal.bar = bar;
     }
 
     // Find the Goal to be updated and update it
