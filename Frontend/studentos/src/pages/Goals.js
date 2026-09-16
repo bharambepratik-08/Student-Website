@@ -33,6 +33,8 @@ const Goals = () => {
               tag={goal.tag}
               date={goal.date}
               progress={goal.bar}
+              des={goal.description}
+              complete={goal.completed}
               id={goal._id}
             />
           );

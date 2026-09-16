@@ -2,7 +2,7 @@ import React from "react";
 
 const GoalsTopBar = ({ onClick }) => {
   return (
-    <div className="display alignItemsC justifyItemsSpaceEvenly">
+    <div className="display alignItemsC justifyItemsSpaceEvenly GoalsTopBar">
       <div>
         <h1>Goals</h1>
         <p className="goalPageTopP">Track and manage your long-term objectives.</p>
