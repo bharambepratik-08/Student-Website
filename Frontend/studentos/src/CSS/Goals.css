@@ -77,3 +77,11 @@
   box-sizing: border-box;
   border-bottom: 2px var(--surface-container-highest) solid;
 }
+
+.TopGoalsDivDash {
+  background-color: var(--surface);
+}
+
+.TopGoalsTitle {
+  border-bottom: 1px var(--outline) solid;
+}
