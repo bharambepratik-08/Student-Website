@@ -20,6 +20,7 @@ import "./CSS/Tasks.css";
 import "./CSS/Focus.css";
 import "./CSS/Dashboard.css";
 import "./CSS/Goals.css";
+import "./CSS/Notification.css"
 import MainLayout from "./Layouts/MainLayout";
 import FocusState from "./context/Focus/Focusstate";
 import GoalState from "./context/Goals/Goalsstate";

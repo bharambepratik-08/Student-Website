@@ -1,0 +1,22 @@
+.NotificationTopBar {
+    border-bottom: 2px var(--surface-container-highest) solid;
+}
+
+.NotificationProp {
+    background-color: var(--surface);
+}
+
+.NotificationRest {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.NotificationPage {
+    height: 100%;
+    background-color: var(--surface-container-low);
+    box-sizing: border-box;
+}
+
+.UpperLook {
+    width: 100%;
+}
