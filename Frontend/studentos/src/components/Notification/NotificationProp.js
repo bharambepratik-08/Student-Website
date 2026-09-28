@@ -4,7 +4,7 @@ const NotificationProp = ( props ) => {
     const { title, description, priority, color, time } = props;
   return (
     <div className='NotificationProp padding-24 display borderRadius-16 gap-24'>
-      <div className='LogoNotification padding-12'>
+      <div className='LogoNotification padding-24 display alignItemsC justifyItemsC'>
         Logo
       </div>
       <div className='NotificationRest padding-12 display displayColumn gap-8'>
@@ -17,10 +17,10 @@ const NotificationProp = ( props ) => {
           </div>
         </div>
         <div className='NotificationBoxTitle'>
-          Title
+          {title}
         </div>
         <div className='NotificationBoxDescription'>
-          Description
+          {description}
         </div>
       </div>
     </div>

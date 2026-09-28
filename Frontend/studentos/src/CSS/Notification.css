@@ -20,3 +20,10 @@
 .UpperLook {
     width: 100%;
 }
+
+.LogoNotification {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: var(--surface-container-low);
+}
