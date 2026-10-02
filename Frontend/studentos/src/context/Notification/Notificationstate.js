@@ -11,11 +11,9 @@ const NotificationState = (props) => {
     title,
     description,
     duration,
-    tag,
-    bar,
-    catogery,
-    autoProgress,
-    date
+    date,
+    time,
+    priority
   ) => {
     const response = await fetch(`${host}/api/notifications/addNotification`, {
       method: "POST",
@@ -28,11 +26,9 @@ const NotificationState = (props) => {
         title,
         description,
         duration,
-        tag,
-        bar,
-        catogery,
-        autoProgress,
-        date
+        date,
+        time,
+        priority
       }),
     });
 
@@ -48,13 +44,16 @@ const NotificationState = (props) => {
 
   // Get All Notification
   const getnotifications = async () => {
-    const response = await fetch(`${host}/api/notifications/fetchAllNotification`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token"), // to identify the user
+    const response = await fetch(
+      `${host}/api/notifications/fetchAllNotification`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"), // to identify the user
+        },
       },
-    });
+    );
 
     const json = await response.json();
     setNotification(json);
@@ -62,13 +61,16 @@ const NotificationState = (props) => {
 
   // Delete a Notification
   const deleteNotification = async (id) => {
-    const response = await fetch(`${host}/api/notifications/deleteNotification/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token"), // to identify the user
+    const response = await fetch(
+      `${host}/api/notifications/deleteNotification/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"), // to identify the user
+        },
       },
-    });
+    );
 
     const json = await response.json();
 
@@ -82,10 +84,14 @@ const NotificationState = (props) => {
     setNotification(newnotifications);
   };
 
-  
   return (
     <NotificationContext.Provider
-      value={{ notification, addNotification, getnotifications, deleteNotification }}
+      value={{
+        notification,
+        addNotification,
+        getnotifications,
+        deleteNotification,
+      }}
     >
       {props.children}
     </NotificationContext.Provider>

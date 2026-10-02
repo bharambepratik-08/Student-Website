@@ -1,11 +1,16 @@
 import React, { useState, useContext } from "react";
 import TaskContext from "../context/tasks/TaskContext";
+import NotificationContext from "../context/Notification/NotificationContext";
 
 // Layout for the add task form (Frontend)
 const AddTask = ({ onClose }) => {
-  // To clear the form after submit
+  // To add the form 
   const context = useContext(TaskContext);
   const { addTask } = context;
+
+  // To send the notification
+  const contextTwo = useContext(NotificationContext);
+  const { addNotification } = contextTwo;
 
   const [IsHr, setIsHr] = useState(0);
   const [IsMin, setIsMin] = useState(0);
@@ -53,6 +58,14 @@ const AddTask = ({ onClose }) => {
       time,
       timeBrk
     );
+    addNotification(
+      formData.title,
+      formData.description,
+      String(time),
+      formData.date || 0,
+      formData.time || 0,
+      formData.priority
+    )
     if (onClose) onClose();
   };
 

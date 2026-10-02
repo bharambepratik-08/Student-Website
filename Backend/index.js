@@ -20,6 +20,7 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/task', require('./routes/tasks')) 
 app.use('/api/focus', require('./routes/focus'))
 app.use('/api/goals', require('./routes/goals'))
+app.use('/api/notifications', require('./routes/notifications'))
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
