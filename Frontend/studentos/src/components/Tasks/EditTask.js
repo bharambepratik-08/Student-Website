@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import TaskContext from "../../context/tasks/TaskContext";
+import NotificationContext from "../../context/Notification/NotificationContext";
 
 
 // Layout for the add task form (Frontend)
@@ -8,6 +9,10 @@ const EditTask = ({ onClose, task }) => {
   // To clear the form after submit 
   const context = useContext(TaskContext);
   const { editTask } = context;
+
+  // To send the notification
+  const contextTwo = useContext(NotificationContext);
+  const { addNotification } = contextTwo;
 
   const [formData, setFormData] = useState({
     title: task.title,
@@ -39,6 +44,14 @@ const EditTask = ({ onClose, task }) => {
       formData.catogery,
       formData.tags,
     );
+    addNotification(
+      formData.title,
+      formData.description,
+      String(formData.time),
+      formData.date || 0,
+      formData.time || 0,
+      formData.priority
+    )
     if (onClose) onClose();
   };
 

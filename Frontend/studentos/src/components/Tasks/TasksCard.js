@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import TaskContext from "../../context/tasks/TaskContext";
 import EditTask from "../Tasks/EditTask";
+import NotificationContext from "../../context/Notification/NotificationContext";
 
 const TasksCard = (props) => {
   const {
@@ -18,6 +19,10 @@ const TasksCard = (props) => {
   } = props;
   const context = useContext(TaskContext);
   const { deleteTask, completeTask, editTask } = context;
+
+  // To send the notification
+  const contextTwo = useContext(NotificationContext);
+  const { addNotification } = contextTwo;
 
   // tell the border color for the card
   const borderColor = () => {
@@ -86,6 +91,17 @@ const TasksCard = (props) => {
     }
   };
 
+  const updateNotification = () => {
+    addNotification(
+      title,
+      description,
+      time,
+      due,
+      time,
+      priority
+    )
+  }
+
   // brings up the edit task page with blured background
   const [isEditTaskOpen, setIsEditTaskOpen] = useState(false);
 
@@ -99,6 +115,7 @@ const TasksCard = (props) => {
           <button
             className="btnOutlineBorder TaskCardSpcBtn"
             onClick={() => {
+              updateNotification();
               completeTask(id); // to make the task completed
             }}
           >
@@ -109,6 +126,7 @@ const TasksCard = (props) => {
           className="btnOutlineBorder TaskCardSpcBtn"
           onClick={() => {
             deleteTask(id); // to delete the task
+            updateNotification();
           }}
         >
           <i class="fa-solid fa-trash"></i>
@@ -116,7 +134,7 @@ const TasksCard = (props) => {
         {!completed && (
           <button
             className="btnOutlineBorder TaskCardSpcBtn"
-            onClick={() => {
+            onClick={() => { 
               setIsEditTaskOpen(true);
             }}
           >

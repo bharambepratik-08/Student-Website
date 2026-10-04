@@ -1,10 +1,15 @@
 import React, { useContext, useState } from "react";
 import GoalContext from "../../context/Goals/GoalsContext";
 import UpdateProgress from "../Goals/UpdateProgress";
+import NotificationContext from "../../context/Notification/NotificationContext";
 
 const GoalCard = (props) => {
   const context = useContext(GoalContext);
   const { deleteGoal } = context;
+
+  // To send the notification
+  const contextTwo = useContext(NotificationContext);
+  const { addNotification } = contextTwo;
 
   const { title, tag, date, progress, des, complete, id } = props;
 
@@ -15,6 +20,17 @@ const GoalCard = (props) => {
   });
 
   const [isUpdateProgress, setIsUpdateProgress] = useState(false);
+
+  const updateNotification = () => {
+    addNotification(
+      title,
+      des, 
+      date,
+      date,
+      id,
+      progress
+    )
+  }
 
   return (
     <div>
@@ -56,7 +72,10 @@ const GoalCard = (props) => {
             </button>}
             <button
               className="btnOutlineBorder borderRadius-16 updateProgressButton"
-              onClick={() => deleteGoal(id)}
+              onClick={() => {
+                deleteGoal(id);
+                updateNotification();
+              }}
             >
               Delete Goal
             </button>

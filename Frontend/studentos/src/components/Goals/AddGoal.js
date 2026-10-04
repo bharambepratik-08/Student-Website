@@ -1,19 +1,21 @@
 import React, { useState, useContext } from "react";
 import GoalContext from "../../context/Goals/GoalsContext";
+import NotificationContext from "../../context/Notification/NotificationContext";
 
 const AddGoal = ({ onClose }) => {
   const context = useContext(GoalContext);
   const { addGoal } = context;
 
+  // To send the notification
+    const contextTwo = useContext(NotificationContext);
+    const { addNotification } = contextTwo;
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     duration: "",
-    tags: "",
-    bar: "",
-    category: "",
-    autoProgress: false,
-    date: ""
+    date: "",
+    priority: "Red"
   });
 
   const handleChange = (e) => {
@@ -36,6 +38,14 @@ const AddGoal = ({ onClose }) => {
       formData.autoProgress || false,
       formData.date
     );
+    addNotification(
+      formData.title,
+      formData.description,
+      String(formData.time || 0),
+      formData.date || 0,
+      formData.time || 0,
+      formData.priority
+    )
     if (onClose) onClose();
   };
 
