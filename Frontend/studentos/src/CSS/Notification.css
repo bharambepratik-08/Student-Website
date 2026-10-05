@@ -27,3 +27,9 @@
     border-radius: 50%;
     background-color: var(--surface-container-low);
 }
+
+.notificationBox {
+    margin: 12px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}

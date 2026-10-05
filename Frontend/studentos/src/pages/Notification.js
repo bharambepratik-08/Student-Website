@@ -17,7 +17,7 @@ const Notification = () => {
         <h1>Notification</h1>
         <p>Stay updated on your productivity flow.</p>
       </div>
-      <div className="notificationBox padding-24">
+      <div className="notificationBox padding-24 display displayColumn gap-12">
         {
           notification.map((notifi) => {
             return (
@@ -31,7 +31,6 @@ const Notification = () => {
             )
           })
         }
-        <NotificationProp />
       </div>
     </div>
   )

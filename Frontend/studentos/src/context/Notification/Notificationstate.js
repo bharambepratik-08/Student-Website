@@ -42,23 +42,7 @@ const NotificationState = (props) => {
     }
   };
 
-  // Get All Notification
-  const getnotifications = async () => {
-    const response = await fetch(
-      `${host}/api/notifications/fetchAllNotification`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("token"), // to identify the user
-        },
-      },
-    );
-
-    const json = await response.json();
-    setNotification(json);
-  };
-
+  
   // Delete a Notification
   const deleteNotification = async (id) => {
     const response = await fetch(
@@ -82,6 +66,20 @@ const NotificationState = (props) => {
       return notification._id !== id;
     });
     setNotification(newnotifications);
+  };
+
+  // Get All Notification
+  const getnotifications = async () => {
+    const response = await fetch(`${host}/api/notifications/fetchAllNotification`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"), // to identify the user
+      },
+    });
+
+    const json = await response.json();
+    setNotification(json);
   };
 
   return (
