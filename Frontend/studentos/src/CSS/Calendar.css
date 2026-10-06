@@ -1,0 +1,16 @@
+.CalendarPage {
+    height: 100%;
+    width: 100%;
+    background-color: var(--surface-container-low);
+    box-sizing: border-box;
+}
+
+.CalendarTopBar {
+    width: 100%;
+    box-sizing: border-box;
+  border-bottom: 2px var(--surface-container-highest) solid;
+}
+
+.LowerCalendar {
+    padding: 0 24px;
+}

@@ -33,3 +33,8 @@
     box-sizing: border-box;
     overflow-y: auto;
 }
+
+.eventDateCalendar {
+    width: 30%;
+}
+

@@ -5,7 +5,7 @@ const Notification = require("../models/Notification");
 const { body, validationResult } = require("express-validator");
 
 // Get all the Notifications for the user using GET: "/api/notifications/fetchAllGoals"
-router.get("/fetchAllGoals", fetchuser, async (req, res) => {
+router.get("/fetchAllNotification", fetchuser, async (req, res) => {
   try {
     const notes = await Notification.find({ user: req.user.id });
     res.json(notes);

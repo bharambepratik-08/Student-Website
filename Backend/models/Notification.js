@@ -25,7 +25,7 @@ const NotificationSchema = new Schema ({
     time: {
         type: String,
         required: true,
-        default: () => new Date.now().toLocaleTimeString
+        default: () => new Date().toLocaleTimeString()
     },
     priority: {
         type: String,
