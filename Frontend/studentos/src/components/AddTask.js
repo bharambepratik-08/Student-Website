@@ -64,7 +64,8 @@ const AddTask = ({ onClose }) => {
       String(time),
       formData.date || 0,
       formData.time || 0,
-      formData.priority
+      formData.priority,
+      'task'
     )
     if (onClose) onClose();
   };

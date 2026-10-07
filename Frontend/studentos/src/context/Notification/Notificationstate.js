@@ -13,7 +13,8 @@ const NotificationState = (props) => {
     duration,
     date,
     time,
-    priority
+    priority,
+    type
   ) => {
     const response = await fetch(`${host}/api/notifications/addNotification`, {
       method: "POST",
@@ -28,7 +29,8 @@ const NotificationState = (props) => {
         duration,
         date,
         time,
-        priority
+        priority,
+        type
       }),
     });
 

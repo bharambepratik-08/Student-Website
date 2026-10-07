@@ -4,6 +4,7 @@
 
 .NotificationProp {
     background-color: var(--surface);
+    border: 2px var(--outline) solid;
 }
 
 .NotificationRest {
@@ -22,8 +23,9 @@
 }
 
 .LogoNotification {
-    height: 16px;
-    width: 16px;
+    height: 24px;
+    width: 24px;
+    font-size: 24px;
     border-radius: 50%;
     background-color: var(--surface-container-low);
 }
@@ -38,3 +40,17 @@
     width: 30%;
 }
 
+.deleteNotificationBtn {
+    background-color: transparent;
+    font-size: large;
+    display: visible;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.NotificationProp:hover {
+    .deleteNotificationBtn {
+        display: visible;
+        opacity: 1;
+    }
+}

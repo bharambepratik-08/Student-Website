@@ -4,7 +4,7 @@ import NotificationContext from '../context/Notification/NotificationContext';
 
 const Notification = () => {
   const context = useContext(NotificationContext);
-  const { notification , getnotifications, deleteNotification } = context;
+  const { notification , getnotifications } = context;
 
   useEffect(() => {
         getnotifications();
@@ -28,7 +28,8 @@ const Notification = () => {
                 color={notifi.color}
                 time={notifi.time}
                 date={notifi.date}
-                deleteNotification
+                type={notifi.type}
+                id={notifi._id}
               />
             )
           })

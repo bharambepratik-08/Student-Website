@@ -5,7 +5,7 @@ import TopGoalsList from "../components/Dashboard/TopGoalsList";
 
 const Dashboard = () => {
   return (
-    <div className="DashboardPage padding-24 display displayColumn">
+    <div className="DashboardPage padding-24 display displayColumn gap-24">
       <div className="display justifyItemsSpaceEvenly">
         <TaskListDisplay />
         <UpcomingTaskList />
