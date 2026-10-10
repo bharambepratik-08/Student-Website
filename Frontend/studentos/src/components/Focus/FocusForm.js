@@ -1,11 +1,21 @@
 import React, { useState, useContext } from "react";
 import FocusContext from "../../context/Focus/FocusContext";
+import NotificationContext from "../../context/Notification/NotificationContext";
 
 // Layout for the add task form (Frontend)
-const FocusForm = ({ onClose, changeTimerBtn, valTrue, setTimerFucntion, setBrkFucntion }) => {
+const FocusForm = ({
+  onClose,
+  changeTimerBtn,
+  valTrue,
+  setTimerFucntion,
+  setBrkFucntion,
+}) => {
   // To clear the form after submit
   const context = useContext(FocusContext);
   const { addFocusSession } = context;
+
+  const contextTwo = useContext(NotificationContext);
+  const { addNotification } = contextTwo;
 
   const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
@@ -15,10 +25,9 @@ const FocusForm = ({ onClose, changeTimerBtn, valTrue, setTimerFucntion, setBrkF
   const [Brkminute, setBrkMinute] = useState(0);
   const [Brkseconds, setBrkSeconds] = useState(0);
 
+  const timerDuration = Number(Number(hour * 60) + Number(minute));
 
-  const timerDuration = Number(Number(hour * 60)+ Number(minute));
-
-  const BrktimerDuration = Number((Brkhour * 60)+ (Brkminute));
+  const BrktimerDuration = Number(Brkhour * 60 + Brkminute);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -34,10 +43,27 @@ const FocusForm = ({ onClose, changeTimerBtn, valTrue, setTimerFucntion, setBrkF
     }));
   };
 
+  const now = new Date();
+  const dateOnly = now.toLocaleTimeString();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    addFocusSession(formData.title, formData.description, timerDuration, BrktimerDuration);
+    addFocusSession(
+      formData.title,
+      formData.description,
+      timerDuration,
+      BrktimerDuration,
+    );
     if (onClose) onClose();
+    addNotification(
+      formData.title,
+      formData.description,
+      String(new Date()),
+      now || 0,
+      dateOnly,
+      "high",
+      "task",
+    );
   };
 
   return (

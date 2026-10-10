@@ -44,6 +44,9 @@ const AddTask = ({ onClose }) => {
     }));
   };
 
+  const now = new Date();
+  const TimeLS = now.toLocaleTimeString;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addTask(
@@ -61,7 +64,7 @@ const AddTask = ({ onClose }) => {
     addNotification(
       formData.title,
       formData.description,
-      String(time),
+      String(TimeLS),
       formData.date || 0,
       formData.time || 0,
       formData.priority,

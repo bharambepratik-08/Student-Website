@@ -24,7 +24,7 @@ router.post(
   ],
   async (req, res) => {
     try {
-      const { title, description, duration, date, time, priority } = req.body;
+      const { title, description, duration, date, time, priority, type } = req.body;
 
       // For errors return bad request
       const errors = validationResult(req);
@@ -39,6 +39,7 @@ router.post(
         date,
         time,
         priority,
+        type,
         user: req.user.id,
       });
 
