@@ -100,12 +100,105 @@ router.post(
 
 router.post("/getuser", fetchuser, async (req, res) => {
   try {
-    userId = req.user.id;
-    const user = await User.findById(userId).select("-password");
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);                                         
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Some error occured");
   }
+});
+
+// Update a existing user using: PUT "/api/auth/updateUser". Login Required
+router.put("/updateUser/:id", fetchuser, async (req, res) => {
+  try {
+    const {
+      email,
+      name,
+      password
+    } = req.body;
+
+    // Create a newTask Obj
+
+    const newTask = {};
+
+    if (name) {
+      newTask.name = name;
+    }
+    if(email) {
+      newTask.email = email;
+    }
+    if(password) {
+      newTask.password = password;
+    }
+
+    // Find the User to be updated and update it
+
+    let user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send("Not Found");
+    }
+
+    if (user.user.toString() !== req.user.id) {
+      return res.status(401).send("Not Allowed");
+    }
+
+    user = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: newTask },
+      { new: true },
+    );
+
+    res.json({ user });
+  } catch (error) {
+    return res.status(500).send("Some error occured");
+  }
+});
+
+// Delete a existing user using: DELETE "/api/auth/deleteUser". Login Required
+router.delete("/deleteUser/:id", fetchuser, async (req, res) => {
+  // Find the User to be deleted and delete it
+  try {
+    let user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send("Not Found");
+    }
+
+    if (user.user.toString() !== req.user.id) {
+      return res.status(401).send("Not Allowed");
+    }
+
+    user = await User.findByIdAndDelete(req.params.id);
+
+    res.json({ "Success": "User has been deleted", user: user });
+  } catch (error) {
+    return res.status(500).send("Some error occured");
+  }
+});
+
+
+// Route: PUT /api/auth/completeUser/:id. Login required
+router.put('/completeUser/:id', fetchuser, async (req, res) => {
+    try {
+        // Find the user to be updated and check if it belongs to the user
+        let user = await User.findById(req.params.id);
+        if (!user) { return res.status(404).send("Not Found") }
+
+        if (user.user.toString() !== req.user.id) {
+            return res.status(401).send("Not Allowed");
+        }
+
+        // Update the 'completed' field to true
+        user = await User.findByIdAndUpdate(
+            req.params.id, 
+            { $set: { completed: true } }, 
+            { new: true } 
+        );
+
+        res.json(user);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 module.exports = router;

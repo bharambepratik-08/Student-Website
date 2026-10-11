@@ -1,51 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/logo.png";
+import UserContext from "../../context/User/UserContext";
 
 // Form layout for the signup (Frontend & Backend)
 
 const SigninForm = () => {
-  const [credentials, setCredentials] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  
+  const context = useContext(UserContext);
+  const { addUser } = context;
+  
   let navigate = useNavigate();
 
-  const handeSubmit = async (e) => {
-    e.preventDefault();
+  const [formData, setFormData] = useState({
+  userName: "",
+  email: "",
+  password: "",
+  cpassword: "",
+});
 
-
-    // Need to change the link (http://localhost:5000/api/auth/createuser) if we go to other server or device 
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: credentials.name,
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
-
-    const json = await response.json();
-
-    if (response.ok) {
-      localStorage.setItem("token", json);
-      navigate("/dashboard");
-    } else {
-      alert(json.error);
-    }
-  };
 
   const onChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
+
+  
+
+const handleSubmit = async (e) => {
+  e.preventDefault();                                  
+  if (formData.password !== formData.cpassword) {
+    alert("Passwords do not match");
+    return;
+  }
+  const ok = await addUser(                        
+    formData.userName,
+    formData.email,
+    formData.password
+  );
+  if (ok) navigate("/dashboard");                      
+};
+  
+
 
   return (
 
     // Frontend 
     <div className="form-sigin-login display alignItemsC justifyItemsC">
-      <form onSubmit={handeSubmit} className="display displayColumn gap-24">
+      <form className="display displayColumn gap-24">
         <img src={logo} alt="studentOs" className="form-logo" />
         <h1 className="createUserHead">Create your account</h1>
         <div className="name-input-createuser display displayColumn gap-8">
@@ -55,8 +60,8 @@ const SigninForm = () => {
             placeholder="John Deo"
             className="InputBoxString padding-8"
             onChange={onChange}
-            name="name"
-            value={credentials.name}
+            name="userName"
+            value={formData.userName}
           />
         </div>
         <div className="email-input-createuser display displayColumn gap-8">
@@ -67,7 +72,7 @@ const SigninForm = () => {
             className="InputBoxString padding-8"
             onChange={onChange}
             name="email"
-            value={credentials.email}
+            value={formData.email}
           />
         </div>
         <div className="pass-input-createuser display displayColumn gap-8">
@@ -77,7 +82,8 @@ const SigninForm = () => {
             placeholder="Password"
             className="InputBoxString padding-8"
             onChange={onChange}
-            name="cpassword"
+            name="password"
+            value={formData.password}
           />
         </div>
         <div className="pass-input-createuser display displayColumn gap-8">
@@ -87,8 +93,7 @@ const SigninForm = () => {
             placeholder="Confirm Password"
             className="InputBoxString padding-8"
             onChange={onChange}
-            name="password"
-            value={credentials.password}
+            name="cpassword"
           />
         </div>
         <div className="termAndCondition display gap-8">
@@ -102,6 +107,7 @@ const SigninForm = () => {
           <button
             type="submit"
             className="createUserBtn borderRadius-12 btnOutlineBorder display alignItemsC justifyItemsC"
+            onClick={handleSubmit}
           >
             Create Account
           </button>
