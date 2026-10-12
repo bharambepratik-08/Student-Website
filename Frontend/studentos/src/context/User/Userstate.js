@@ -8,37 +8,43 @@ const UserState = (props) => {
   // Add a User
 
   const addUser = async (name, email, password) => {
-    const response = await fetch(`${host}/api/auth/createuser`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        name,
-        password,
-      }),
-    });
+    try {
+      const response = await fetch(`${host}/api/auth/createuser`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-    const json = await response.json();
+      const json = await response.json();
 
-    if (response.ok) {
-      localStorage.setItem("token", json); // save the JWT
-      setUsers(users.concat(json));
-    } else {
-      console.error("Backend Error:", json);
-      alert(json.errors ? json.errors[0].msg : "Failed to add users");
+      if (response.ok) {
+        localStorage.setItem("token", json);
+        return true;
+      } else {
+        console.error("Backend Error:", json);
+        alert(
+          json.error ||
+            (json.errors && (json.errors[0].msg || json.errors)) ||
+            "Failed to add user",
+        );
+        return false;
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Cannot reach the server. Is the backend running on port 5000?");
+      return false;
     }
   };
 
   // Get All Users
   const getUser = async () => {
-    const response = await fetch(`${host}/api/auth/fetchAllUsers`, {
-      method: "GET",
+    const response = await fetch(`${host}/api/auth/getuser`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token"), // to identify the user
+        "auth-token": localStorage.getItem("token"),
       },
     });
-
     const json = await response.json();
     setUsers(json);
   };
@@ -67,7 +73,7 @@ const UserState = (props) => {
 
   // Edit a User
   const editUser = async (id, name, email, password) => {
-    const response = await fetch(`${host}/api/auth/updateTask/${id}`, {
+    const response = await fetch(`${host}/api/auth/updateUser/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

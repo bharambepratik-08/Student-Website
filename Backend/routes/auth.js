@@ -108,6 +108,7 @@ router.post("/getuser", fetchuser, async (req, res) => {
   }
 });
 
+
 // Update a existing user using: PUT "/api/auth/updateUser". Login Required
 router.put("/updateUser/:id", fetchuser, async (req, res) => {
   try {

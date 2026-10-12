@@ -78,7 +78,7 @@ const handleSubmit = async (e) => {
         <div className="pass-input-createuser display displayColumn gap-8">
           <p>Password</p>
           <input
-            type="text"
+            type="password"
             placeholder="Password"
             className="InputBoxString padding-8"
             onChange={onChange}
@@ -89,7 +89,7 @@ const handleSubmit = async (e) => {
         <div className="pass-input-createuser display displayColumn gap-8">
           <p>Confirm Password</p>
           <input
-            type="text"
+            type="password"
             placeholder="Confirm Password"
             className="InputBoxString padding-8"
             onChange={onChange}

@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../context/User/UserContext";
 
 const Navbar = ({ onOpenAddTask }) => {
+  const context = useContext(UserContext);
+  const { users, getUser } = context;
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      getUser();          
+    }
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
     {/* NavBar Component */}
@@ -81,7 +92,7 @@ const Navbar = ({ onOpenAddTask }) => {
           </div>
         </div>
         <div className="profileUserIden display alignItemsC justifyItemsC">
-          ----
+          <p>{users.name}</p>
         </div>
       </div>
     </>
