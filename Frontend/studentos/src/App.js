@@ -21,6 +21,7 @@ import "./CSS/Focus.css";
 import "./CSS/Dashboard.css";
 import "./CSS/Goals.css";
 import "./CSS/Calendar.css";
+import "./CSS/Setting.css"
 import "./CSS/Notification.css";
 import MainLayout from "./Layouts/MainLayout";
 import FocusState from "./context/Focus/Focusstate";

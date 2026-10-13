@@ -36,6 +36,26 @@ const UserState = (props) => {
     }
   };
 
+  // Login User 
+  const LoginUser = async (email, password) => {
+    const response = await fetch(`${host}/api/auth/login`, { 
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        password
+      }),
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem('token', json); // json is the auth token string
+    } else {
+      alert("Invalid Credentials")
+    }
+  };
+
   // Get All Users
   const getUser = async () => {
     const response = await fetch(`${host}/api/auth/getuser`, {
@@ -106,7 +126,7 @@ const UserState = (props) => {
 
   return (
     <UserContext.Provider
-      value={{ users, addUser, deleteUser, editUser, getUser }}
+      value={{ users, addUser, deleteUser, editUser, getUser, LoginUser }}
     >
       {props.children}
     </UserContext.Provider>

@@ -1,50 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../../context/User/UserContext";
 
 // Form layout for the login (Frontend & Backend)
 
 const LoginForm = () => {
 
-  // Backend 
+  const context = useContext(UserContext);
+  const { LoginUser } = context;
+
+  const navigate = useNavigate();
+  
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
     password: "",
   });
-  let navigate = useNavigate();
-
-  const handeSubmit = async (e) => {
-    e.preventDefault();
-
-
-    // Need to change the link (http://localhost:5000/api/auth/login) if we go to other server or device 
-    const response = await fetch("http://localhost:5000/api/auth/login", { 
-       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
-
-    const json = await response.json();
-
-    if (response.ok) {
-      localStorage.setItem('token', json); // json is the auth token string
-      navigate('/dashboard')
-    } else {
-      alert("Invalid Credentials")
-    }
-  };
 
   const onChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setCredentials((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const ok = LoginUser(
+      credentials.email,
+      credentials.password
+    );
+
+    if (ok) {navigate('/dashboard')};
+  }
+
   return (
     // Frontend
     <div className="form-sigin-login display alignItemsC justifyItemsC">
-      <form onSubmit={handeSubmit} className="display displayColumn gap-24">
+      <form onSubmit={handleSubmit} className="display displayColumn gap-24">
         <img src={logo} alt="studentOs" className="form-logo" />
         <h1 className="createUserHead">Welcome Back</h1>
         <div className="email-input-createuser display displayColumn InputBoxBox gap-8">

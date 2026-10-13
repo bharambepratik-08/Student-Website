@@ -1,0 +1,22 @@
+.SettingPage {
+    height: 100%;
+    background-color: var(--surface-container-low);
+    box-sizing: border-box;
+}
+
+.SettingTopBar {
+    border-bottom: 2px var(--surface-container-highest) solid;
+}
+
+.settingNavbarBtn {
+    cursor: pointer;
+    width: 100%;
+}
+
+.settingNavBar {
+    border-right: 2px var(--surface-container-highest) solid;
+}
+
+.settingNavbarBtn:hover {
+    background-color: var(--secondary-fixed-dim);
+}
