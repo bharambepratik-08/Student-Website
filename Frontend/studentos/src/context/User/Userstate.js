@@ -92,7 +92,7 @@ const UserState = (props) => {
   };
 
   // Edit a User
-  const editUser = async (id, name, email, password) => {
+  const editUser = async (id, name, email) => {
     const response = await fetch(`${host}/api/auth/updateUser/${id}`, {
       method: "PUT",
       headers: {
@@ -101,8 +101,7 @@ const UserState = (props) => {
       },
       body: JSON.stringify({
         name,
-        email,
-        password,
+        email
       }),
     });
 
@@ -115,7 +114,6 @@ const UserState = (props) => {
       const element = newUsers[index];
       if (element._id === id) {
         element.email = email;
-        element.password = password;
         element.name = name;
         break;
       }

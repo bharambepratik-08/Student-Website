@@ -20,3 +20,25 @@
 .settingNavbarBtn:hover {
     background-color: var(--secondary-fixed-dim);
 }
+
+.profileSettingBox { 
+    background-color: var(--surface);
+}
+
+.TopBarProfileSetting {
+    border-bottom: 2px var(--surface-container-high) solid;
+}
+
+.profileSettingTopBarP {
+    color: var(--text-secondary);
+}
+
+.profileSettingInput {
+    border: 1px var(--surface-container-highest) solid;
+}
+
+.saveChangeBtn {
+    cursor: pointer;
+    background-color: var(--secondary-container);
+    color: var(--surface);
+}
